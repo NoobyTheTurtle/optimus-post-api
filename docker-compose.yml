@@ -2,19 +2,23 @@ version: '3'
 
 services:
   postgres:
-    container_name: hackathon-postgres
+    container_name: optimus-post-postgres
     image: postgres:15.0
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: password
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
     restart: always
     ports:
       - "127.0.0.1:5432:5432"
 
   redis:
-    container_name: hackathon-redis
+    container_name: optimus-post-redis
     image: redis:7.0
     restart: always
+    environment:
+      - REDIS_PASSWORD=$REDIS_PASSWORD
     ports:
       - "127.0.0.1:6379:6379"

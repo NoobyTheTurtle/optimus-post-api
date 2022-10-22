@@ -46,6 +46,8 @@ group :development do
   # gem "spring"
 end
 
-
 gem "sidekiq", "~> 6.5"
 gem "dotenv-rails", "~> 2.8"
+gem "faraday", "~> 2.6"
+
+gem "rubyzip", "~> 2.3"
