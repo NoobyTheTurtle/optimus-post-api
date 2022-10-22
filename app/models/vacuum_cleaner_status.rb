@@ -1,0 +1,2 @@
+class VacuumCleanerStatus < ApplicationRecord
+end

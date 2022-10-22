@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_22_163204) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_22_184605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,13 +28,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_22_163204) do
   create_table "mos_rows", force: :cascade do |t|
     t.bigint "global_id"
     t.jsonb "geo_data"
-    t.string "email"
-    t.string "public_phone"
+    t.jsonb "email", default: [], array: true
+    t.jsonb "public_phone", default: [], array: true
     t.text "common_name"
     t.bigint "mos_dataset_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["mos_dataset_id"], name: "index_mos_rows_on_mos_dataset_id"
+  end
+
+  create_table "vacuum_cleaner_statuses", force: :cascade do |t|
+    t.integer "successful", default: [], array: true
+    t.integer "failed", default: [], array: true
+    t.string "failed_text", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "mos_rows", "mos_datasets"

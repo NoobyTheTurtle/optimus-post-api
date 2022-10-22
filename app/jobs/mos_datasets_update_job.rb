@@ -1,6 +1,6 @@
 class MosDatasetsUpdateJob < ApplicationJob
   queue_as :default
-  sidekiq_options retry: false
+  # sidekiq_options retry: false
 
   def perform
     result = MosAdapter.get_datasets

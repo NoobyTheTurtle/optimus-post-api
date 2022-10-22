@@ -29,6 +29,35 @@ class MosAdapter
       )
     end
 
+    def get_rows(dataset_id:, top: 500, skip: 0, try: 0)
+      params = if skip == 0
+                 { '$top' => top }
+               else
+                 { '$top' => top, '$skip' => skip }
+               end
+
+      result = send_request(
+        url: "/v1/datasets/#{dataset_id}/rows",
+        endpoint: API_DATA_ENDPOINT,
+        params: params
+      )
+      if result[:success]
+        result
+      else
+        raise StandardError
+      end
+    rescue
+      sleep 2
+      get_rows(dataset_id: dataset_id, top: top, skip: skip, try: try + 1) unless try >= 10
+    end
+
+    def get_datasets_count(dataset_id:)
+      send_request(
+        url: "/v1/datasets/#{dataset_id}/count",
+        endpoint: API_DATA_ENDPOINT,
+      )
+    end
+
     private
 
     def send_request(url:, endpoint:, params: {})
