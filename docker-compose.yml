@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: hackathon-postgres
+    image: postgres:15.0
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+    restart: always
+    ports:
+      - "127.0.0.1:5432:5432"
+
+  redis:
+    container_name: hackathon-redis
+    image: redis:7.0
+    restart: always
+    ports:
+      - "127.0.0.1:6379:6379"

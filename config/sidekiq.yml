@@ -1,0 +1,12 @@
+development:
+  :concurrency: 2
+
+production:
+  :concurrency: 16
+
+:max_retries: 1
+
+:logfile: ./log/sidekiq.log
+
+:queues:
+  - default
