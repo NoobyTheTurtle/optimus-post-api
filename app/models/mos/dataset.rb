@@ -5,6 +5,6 @@ class Mos::Dataset < Mos::Model
     path = "#{Rails.root}/tmp/mos_datasets/#{id}.json"
     return unless File.exist?(path)
 
-    JSON.load(File.open(path, encoding: Mos::ENCODING))
+    JSON.parse(File.open(path, encoding: Mos::ENCODING))
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MosAdapter
   include Singleton
 
@@ -30,7 +32,7 @@ class MosAdapter
     end
 
     def get_rows(dataset_id:, top: 500, skip: 0, try: 0)
-      params = if skip == 0
+      params = if skip.zero?
                  { '$top' => top }
                else
                  { '$top' => top, '$skip' => skip }
@@ -39,22 +41,22 @@ class MosAdapter
       result = send_request(
         url: "/v1/datasets/#{dataset_id}/rows",
         endpoint: API_DATA_ENDPOINT,
-        params: params
+        params:
       )
       if result[:success]
         result
       else
         raise StandardError
       end
-    rescue
+    rescue StandardError
       sleep 2
-      get_rows(dataset_id: dataset_id, top: top, skip: skip, try: try + 1) unless try >= 10
+      get_rows(dataset_id:, top:, skip:, try: try + 1) unless try >= 10
     end
 
     def get_datasets_count(dataset_id:)
       send_request(
         url: "/v1/datasets/#{dataset_id}/count",
-        endpoint: API_DATA_ENDPOINT,
+        endpoint: API_DATA_ENDPOINT
       )
     end
 
@@ -75,7 +77,7 @@ class MosAdapter
       if response.status == 200
         { success: true, response: response.body }
       else
-        { success: false, response: response }
+        { success: false, response: }
       end
     end
   end
