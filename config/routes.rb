@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
@@ -7,10 +6,16 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  if Rails.env.development?
-    mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql'
-    mount Sidekiq::Web => '/sidekiq'
+  namespace :api do
+    namespace :v1 do
+      resources :districts, only: :index
+      resources :areas, only: :show
+    end
   end
 
-  post '/graphql', to: 'graphql#execute'
+  if Rails.env.development?
+    mount Sidekiq::Web => '/sidekiq'
+    mount Rswag::Ui::Engine => '/api-docs'
+    mount Rswag::Api::Engine => '/api-docs'
+  end
 end

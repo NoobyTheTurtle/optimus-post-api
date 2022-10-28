@@ -1,25 +1,24 @@
 class MosRowsUpdateJob < ApplicationJob
   queue_as :default
-  sidekiq_options retry: 0
+  sidekiq_options retry: false
 
   def perform
     failed = []
     successful = []
-    failed_text = []
-    Mos::Dataset.where(contains_geodata: true).find_each do |dataset|
+    info = []
+    Mos::Dataset.limit(300).find_each do |dataset|
       result = Mos::MosRowsUpdateProcess.call_via_json(dataset.id)
-      case result
-      when true
+      if result == true
         successful << dataset.id
-      when false
-        Mos::MosRowsUpdateProcess.call_via_api(dataset.id)
       else
+        info << "Not json file, dataset_id: #{dataset.id}"
         failed << dataset.id
+        Mos::MosRowsUpdateProcess.call_via_api(dataset.id)
       end
     rescue StandardError => e
       failed << dataset.id
-      failed_text << e.to_s
+      info << "dataset_id: #{dataset.id} \n ERROR: #{e&.to_s}"
     end
-    VacuumCleanerStatus.create(successful:, failed:, failed_text:)
+    VacuumCleanerStatus.create(successful:, failed:, info:)
   end
 end

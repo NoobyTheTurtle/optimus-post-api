@@ -31,9 +31,9 @@ module Mos
             next unless File.exist?(path)
 
             file = File.open(path, encoding: Mos::ENCODING)
-            data = JSON.parse(file)
+            data = JSON.parse(file.read)
             data.each do |row|
-              create_row(row, dataset_id)
+              create_row(row, dataset_id) if row['geoData']
             end
           end
           true
@@ -58,7 +58,7 @@ module Mos
 
           (result[:response] || []).each do |row|
             row = row['Cells']
-            create_row(row, dataset_id)
+            create_row(row, dataset_id) if row['geoData']
           end
           break if count <= top
 
@@ -73,9 +73,6 @@ module Mos
         Mos::Row.find_or_create_by(
           global_id: row['global_id'],
           geo_data: row['geoData'],
-          email: Array(row['Email']),
-          public_phone: Array(row['PublicPhone']),
-          common_name: row['CommonName'],
           mos_dataset_id: dataset_id
         )
       end

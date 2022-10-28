@@ -78,9 +78,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_23_095940) do
   create_table "mos_rows", force: :cascade do |t|
     t.bigint "global_id"
     t.jsonb "geo_data"
-    t.jsonb "email", default: [], array: true
-    t.jsonb "public_phone", default: [], array: true
-    t.text "common_name"
     t.bigint "mos_dataset_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -90,7 +87,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_23_095940) do
   create_table "vacuum_cleaner_statuses", force: :cascade do |t|
     t.integer "successful", default: [], array: true
     t.integer "failed", default: [], array: true
-    t.string "failed_text", default: [], array: true
+    t.string "info", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

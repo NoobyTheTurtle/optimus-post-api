@@ -1,0 +1,33 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+  description: This is the first version of API
+paths:
+  areas/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show area
+      responses:
+        '200':
+          description: Successful
+        '404':
+          description: Not found
+  districts:
+    get:
+      summary: List districts
+      responses:
+        '200':
+          description: Successful
+servers:
+- url: http://{defaultHost}/api/v1/
+  variables:
+    defaultHost:
+      default: localhost:3000

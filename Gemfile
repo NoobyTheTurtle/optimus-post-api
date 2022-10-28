@@ -38,20 +38,23 @@ gem 'image_processing', '~> 1.2'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+gem 'active_model_serializers', '~> 0.10.13'
+gem 'dotenv-rails', '~> 2.8'
+gem 'faraday', '~> 2.6'
+gem 'rswag', '~> 2.7'
+gem 'rubyzip', '~> 2.3'
+gem 'sidekiq', '~> 6.5'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails', '~> 6.2'
+  gem 'faker', '~> 2.23'
+  gem 'rspec-rails', '~> 6.0'
 end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  gem 'graphiql-rails', '~> 1.8'
   gem 'rubocop', '~> 1.37'
 end
-
-gem 'dotenv-rails', '~> 2.8'
-gem 'faraday', '~> 2.6'
-gem 'graphql', '~> 2.0'
-gem 'rubyzip', '~> 2.3'
-gem 'sidekiq', '~> 6.5'
