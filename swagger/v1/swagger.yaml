@@ -4,6 +4,55 @@ info:
   title: API V1
   version: v1
   description: This is the first version of API
+components:
+  schemas:
+    district:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        short_name:
+          type: string
+        square:
+          type: number
+        population:
+          type: integer
+      required:
+      - id
+      - name
+      - short_name
+      - square
+      - population
+    area:
+      type: object
+      properties:
+        id:
+          type: integer
+        population:
+          type: integer
+        name:
+          type: string
+        square:
+          type: number
+        population_density:
+          type: number
+        square_housing_stock:
+          type: number
+        living_square_per_person:
+          type: number
+        district_id:
+          type: integer
+      required:
+      - id
+      - population
+      - square
+      - name
+      - population_density
+      - square_housing_stock
+      - living_square_per_person
+      - district_id
 paths:
   "/areas/{id}":
     parameters:
@@ -14,20 +63,119 @@ paths:
       schema:
         type: string
     get:
-      summary: Show area
+      summary: Show area by id
+      tags:
+      - Areas
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                    id: 6
+                    population: 763051
+                    square: 15.16
+                    name: Boehm Neck
+                    population_density: 28.21
+                    square_housing_stock: 12.05
+                    living_square_per_person: 73.71
+                    district_id: 6
+              schema:
+                "$ref": "#/components/schemas/area"
         '404':
           description: Not found
-  "/districts":
+  "/districts/{district_id}/areas":
+    parameters:
+    - name: district_id
+      in: path
+      description: district_id
+      required: true
+      schema:
+        type: string
     get:
-      summary: List districts
+      summary: Array areas by district
+      tags:
+      - Areas
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                  - id: 7
+                    population: 962665
+                    square: 65.21
+                    name: Sparkle Mountain
+                    population_density: 25.99
+                    square_housing_stock: 53.82
+                    living_square_per_person: 48.92
+                    district_id: 7
+                  - id: 8
+                    population: 432073
+                    square: 95.28
+                    name: Maximo Vista
+                    population_density: 70.81
+                    square_housing_stock: 41.68
+                    living_square_per_person: 75.38
+                    district_id: 7
+                  - id: 9
+                    population: 722607
+                    square: 21.84
+                    name: Wilford Squares
+                    population_density: 46.86
+                    square_housing_stock: 58.94
+                    living_square_per_person: 86.87
+                    district_id: 7
+                  - id: 10
+                    population: 678263
+                    square: 20.14
+                    name: Criselda Cliff
+                    population_density: 57.84
+                    square_housing_stock: 25.87
+                    living_square_per_person: 27.21
+                    district_id: 7
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/area"
+  "/districts":
+    get:
+      summary: Array districts
+      tags:
+      - Districts
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                  - id: 8
+                    name: Gail Walks
+                    short_name: NH
+                    square: 51.94
+                    population: 969929
+                  - id: 9
+                    name: Murazik Extension
+                    short_name: WV
+                    square: 27.15
+                    population: 963728
+                  - id: 10
+                    name: Dorian Ports
+                    short_name: MT
+                    square: 34.34
+                    population: 981255
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/district"
 servers:
-- url: http://{defaultHost}/api/v1/
+- url: http://{defaultHost}/api/v1
   variables:
     defaultHost:
-      default: localhost:3000
+      default: 188.72.109.162:3000

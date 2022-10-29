@@ -6,18 +6,21 @@ class MosRowsUpdateJob < ApplicationJob
     failed = []
     successful = []
     info = []
-    Mos::Dataset.limit(300).find_each do |dataset|
-      result = Mos::MosRowsUpdateProcess.call_via_json(dataset.id)
-      if result == true
+
+    Mos::Dataset.where(id: Mos::Dataset::FULL_DATASET_IDS).find_each do |dataset|
+      Mos::RowsUpdateProcess.call_via_api(dataset.id) ? (successful << dataset.id) : (failed << dataset.id)
+    end
+
+    Mos::Dataset.where.not(id: Mos::Dataset::FULL_DATASET_IDS).find_each do |dataset|
+      if Mos::RowsUpdateProcess.call_via_api(dataset.id) || Mos::RowsUpdateProcess.call_via_json(dataset.id)
         successful << dataset.id
       else
-        info << "Not json file, dataset_id: #{dataset.id}"
         failed << dataset.id
-        Mos::MosRowsUpdateProcess.call_via_api(dataset.id)
+        info << "Not json file, dataset_id: #{dataset.id}"
       end
     rescue StandardError => e
-      failed << dataset.id
       info << "dataset_id: #{dataset.id} \n ERROR: #{e&.to_s}"
+      failed << dataset.id
     end
     VacuumCleanerStatus.create(successful:, failed:, info:)
   end

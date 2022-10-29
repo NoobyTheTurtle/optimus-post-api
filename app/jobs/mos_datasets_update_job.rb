@@ -5,16 +5,21 @@ class MosDatasetsUpdateJob < ApplicationJob
   def perform
     result = MosAdapter.get_datasets
     if result[:success]
-      result[:response].each do |item|
-        Mos::Dataset.find_or_create_by(
-          id: item['Id'],
-          caption: item['Caption'],
-          category_id: item['CategoryId'],
-          keywords: item['Keywords'],
-          contains_geodata: item['ContainsGeodata'],
-          identification_number: item['IdentificationNumber']
-        )
+      result[:response].each do |data|
+        Mos::Dataset.find_or_initialize_by(id: data['Id'])
+                    .update(attributes_by_data(Mos::Dataset.column_names, data))
       end
+    end
+  end
+
+  private
+
+  def attributes_by_data(attributes, data)
+    data.each_with_object({}) do |el, hash|
+      key = el.first.to_s.underscore
+      next if key == 'id'
+
+      hash[key] = el.last if attributes.include?(key)
     end
   end
 end

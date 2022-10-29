@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_23_095940) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_29_165305) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,24 +64,169 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_23_095940) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "mos_culture_houses", force: :cascade do |t|
+    t.string "common_name"
+    t.bigint "global_id"
+    t.string "full_name"
+    t.string "short_name"
+    t.jsonb "org_info", default: [], array: true
+    t.jsonb "object_address", default: [], array: true
+    t.string "chief_org"
+    t.string "chief_name"
+    t.string "chief_position"
+    t.string "public_phone"
+    t.string "email"
+    t.jsonb "working_hours", default: [], array: true
+    t.string "clarification_of_working_hours"
+    t.string "web_site"
+    t.jsonb "geo_data"
+    t.bigint "mos_dataset_id", null: false
+    t.index ["mos_dataset_id"], name: "index_mos_culture_houses_on_mos_dataset_id"
+  end
+
   create_table "mos_datasets", force: :cascade do |t|
+    t.integer "version_number"
+    t.integer "release_number"
     t.string "caption"
+    t.string "publish_date"
     t.integer "category_id"
+    t.integer "department_id"
+    t.text "full_description"
     t.text "keywords"
     t.boolean "contains_geodata"
+    t.boolean "contains_acc_env_data"
+    t.boolean "is_foreign"
+    t.boolean "is_seasonal"
+    t.boolean "is_archive"
+    t.boolean "is_new"
     t.string "identification_number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_mos_datasets_on_category_id"
+    t.string "season"
+    t.string "last_update_date"
+    t.string "sef_url"
+  end
+
+  create_table "mos_kiosks", force: :cascade do |t|
+    t.bigint "global_id"
+    t.string "object_type"
+    t.string "name"
+    t.string "adm_area"
+    t.string "district"
+    t.string "address"
+    t.string "unom"
+    t.string "specialization"
+    t.string "period_of_placement"
+    t.integer "facility_area"
+    t.string "contract_status"
+    t.string "contract_number"
+    t.string "name_of_business_entity"
+    t.string "contract_begin"
+    t.string "contract_end"
+    t.string "contract_basis"
+    t.string "start_date_trading"
+    t.string "contract_type"
+    t.jsonb "geo_data"
+    t.bigint "mos_dataset_id", null: false
+    t.index ["mos_dataset_id"], name: "index_mos_kiosks_on_mos_dataset_id"
+  end
+
+  create_table "mos_libraries", force: :cascade do |t|
+    t.string "common_name"
+    t.string "full_name"
+    t.string "short_name"
+    t.jsonb "org_info", default: [], array: true
+    t.jsonb "object_address", default: [], array: true
+    t.string "chief_org"
+    t.string "chief_name"
+    t.string "chief_position"
+    t.string "public_phone"
+    t.string "email"
+    t.jsonb "working_hours", default: [], array: true
+    t.string "clarification_of_working_hours"
+    t.string "web_site"
+    t.integer "num_of_seats"
+    t.integer "num_of_readers"
+    t.integer "num_of_visitors"
+    t.bigint "global_id"
+    t.jsonb "geo_data"
+    t.bigint "mos_dataset_id", null: false
+    t.index ["mos_dataset_id"], name: "index_mos_libraries_on_mos_dataset_id"
+  end
+
+  create_table "mos_multifunctional_centers", force: :cascade do |t|
+    t.string "common_name"
+    t.string "full_name"
+    t.string "short_name"
+    t.string "adm_area"
+    t.string "district"
+    t.string "address"
+    t.string "chief_name"
+    t.string "chief_position"
+    t.string "public_phone"
+    t.jsonb "working_hours", default: [], array: true
+    t.string "clarification_of_working_hours"
+    t.string "open_date"
+    t.string "extra_services", default: [], array: true
+    t.float "center_area"
+    t.integer "window_count"
+    t.string "web_site"
+    t.jsonb "availability", default: [], array: true
+    t.bigint "global_id"
+    t.jsonb "geo_data"
+    t.bigint "mos_dataset_id", null: false
+    t.index ["mos_dataset_id"], name: "index_mos_multifunctional_centers_on_mos_dataset_id"
   end
 
   create_table "mos_rows", force: :cascade do |t|
     t.bigint "global_id"
     t.jsonb "geo_data"
     t.bigint "mos_dataset_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.jsonb "data"
     t.index ["mos_dataset_id"], name: "index_mos_rows_on_mos_dataset_id"
+  end
+
+  create_table "mos_shopping_facilities", force: :cascade do |t|
+    t.bigint "global_id"
+    t.string "object_type"
+    t.string "name"
+    t.string "adm_area"
+    t.string "district"
+    t.string "address"
+    t.string "unom"
+    t.string "specialization"
+    t.string "period_of_placement"
+    t.integer "facility_area"
+    t.string "contract_status"
+    t.string "contract_number"
+    t.string "name_of_business_entity"
+    t.string "contract_begin"
+    t.string "contract_end"
+    t.string "contract_basis"
+    t.string "start_date_trading"
+    t.string "end_date_trading"
+    t.string "contract_type"
+    t.jsonb "geo_data"
+    t.bigint "mos_dataset_id", null: false
+    t.index ["mos_dataset_id"], name: "index_mos_shopping_facilities_on_mos_dataset_id"
+  end
+
+  create_table "mos_sports_facilities", force: :cascade do |t|
+    t.string "short_name"
+    t.string "full_name"
+    t.string "common_name"
+    t.jsonb "org_info", default: [], array: true
+    t.jsonb "object_address", default: [], array: true
+    t.string "chief_name"
+    t.string "chief_position"
+    t.string "chief_phone"
+    t.string "public_phone"
+    t.string "email"
+    t.string "web_site"
+    t.string "clarification_working_hours"
+    t.jsonb "working_hours", default: [], array: true
+    t.bigint "global_id"
+    t.jsonb "geo_data"
+    t.bigint "mos_dataset_id", null: false
+    t.index ["mos_dataset_id"], name: "index_mos_sports_facilities_on_mos_dataset_id"
   end
 
   create_table "vacuum_cleaner_statuses", force: :cascade do |t|
@@ -95,5 +240,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_23_095940) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "areas", "districts"
+  add_foreign_key "mos_culture_houses", "mos_datasets"
+  add_foreign_key "mos_kiosks", "mos_datasets"
+  add_foreign_key "mos_libraries", "mos_datasets"
+  add_foreign_key "mos_multifunctional_centers", "mos_datasets"
   add_foreign_key "mos_rows", "mos_datasets"
+  add_foreign_key "mos_shopping_facilities", "mos_datasets"
+  add_foreign_key "mos_sports_facilities", "mos_datasets"
 end

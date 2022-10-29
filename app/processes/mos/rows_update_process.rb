@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'zip'
 
 module Mos
-  class MosRowsUpdateProcess
+  class RowsUpdateProcess
     class << self
       def call_via_json(dataset_id)
         result = MosAdapter.get_id_for_json(dataset_id:)
@@ -12,7 +14,7 @@ module Mos
 
         directory_name = "#{Rails.root}/tmp/mos_datasets"
         Dir.mkdir(directory_name) unless File.exist?(directory_name)
-        result = MosAdapter.get_dataset_row(json_id: id)
+        result = MosAdapter.get_json_dataset_row(json_id: id)
         return unless result[:success]
 
         begin
@@ -33,7 +35,7 @@ module Mos
             file = File.open(path, encoding: Mos::ENCODING)
             data = JSON.parse(file.read)
             data.each do |row|
-              create_row(row, dataset_id) if row['geoData']
+              Mos::RowCreateProcess.call(row, dataset_id) if row['geoData']
             end
           end
           true
@@ -47,34 +49,28 @@ module Mos
 
       def call_via_api(dataset_id)
         result = MosAdapter.get_datasets_count(dataset_id:)
-        return unless result[:success]
+        return false unless result[:success]
 
         count = result[:response]
-        top = 500
-        skip = 0
+        top = skip = nil
+        if count >= 10_000
+          top = 500
+          skip = 0
+        end
         loop do
           result = MosAdapter.get_rows(dataset_id:, top:, skip:)
           break unless result[:success]
 
           (result[:response] || []).each do |row|
             row = row['Cells']
-            create_row(row, dataset_id) if row['geoData']
+            Mos::RowCreateProcess.call(row, dataset_id)
           end
-          break if count <= top
+          break if !top || count <= top
 
           skip += 500
           top += 500
         end
-      end
-
-      private
-
-      def create_row(row, dataset_id)
-        Mos::Row.find_or_create_by(
-          global_id: row['global_id'],
-          geo_data: row['geoData'],
-          mos_dataset_id: dataset_id
-        )
+        true
       end
     end
   end

@@ -25,7 +25,7 @@ case $1 in
   rspec)
     docker exec -it optimus-post-app bash -c "RAILS_ENV='test' bundle exec rspec" ;;
   swagger)
-    docker exec -it optimus-post-app bash -c "RAILS_ENV='development' rake rswag:specs:swaggerize" ;;
+    docker exec -it optimus-post-app bash -c "SWAGGER_DRY_RUN=0 RAILS_ENV=test rake rswag:specs:swaggerize" ;;
   *)
     echo "Using: ./optimus-post.sh [init_db 'db_password', start, stop, rmi, connect, console, migrate, rspec]"
     echo "./optimus-post.sh rmi removes all images in the system, be careful!" ;;

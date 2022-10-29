@@ -22,13 +22,42 @@ RSpec.configure do |config|
         version: 'v1',
         description: 'This is the first version of API'
       },
+      components: {
+        schemas: {
+          district: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+              name: { type: 'string' },
+              short_name: { type: 'string' },
+              square: { type: 'number' },
+              population: { type: 'integer' }
+            },
+            required: %w[id name short_name square population]
+          },
+          area: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+              population: { type: 'integer' },
+              name: { type: 'string' },
+              square: { type: 'number' },
+              population_density: { type: 'number' },
+              square_housing_stock: { type: 'number' },
+              living_square_per_person: { type: 'number' },
+              district_id: { type: 'integer' }
+            },
+            required: %w[id population square name population_density square_housing_stock living_square_per_person district_id]
+          }
+        }
+      },
       paths: {},
       servers: [
         {
-          url: 'http://{defaultHost}/api/v1/',
+          url: 'http://{defaultHost}/api/v1',
           variables: {
             defaultHost: {
-              default: 'localhost:3000'
+              default: '188.72.109.162:3000'
             }
           }
         }

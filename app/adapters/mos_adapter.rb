@@ -23,7 +23,7 @@ class MosAdapter
       )
     end
 
-    def get_dataset_row(json_id:)
+    def get_json_dataset_row(json_id:)
       send_request(
         url: '/EHDWSREST/catalog/export/get',
         endpoint: OP_ENDPOINT,
@@ -31,11 +31,11 @@ class MosAdapter
       )
     end
 
-    def get_rows(dataset_id:, top: 500, skip: 0, try: 0)
-      params = if skip.zero?
-                 { '$top' => top }
+    def get_rows(dataset_id:, top:, skip:, try: 0)
+      params = if top
+                 skip.zero? ? { '$top' => top } : { '$top' => top, '$skip' => skip }
                else
-                 { '$top' => top, '$skip' => skip }
+                 {}
                end
 
       result = send_request(
@@ -43,11 +43,7 @@ class MosAdapter
         endpoint: API_DATA_ENDPOINT,
         params:
       )
-      if result[:success]
-        result
-      else
-        raise StandardError
-      end
+      result[:success] ? result : raise(StandardError)
     rescue StandardError
       sleep 2
       get_rows(dataset_id:, top:, skip:, try: try + 1) unless try >= 10

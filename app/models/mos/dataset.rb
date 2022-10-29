@@ -1,4 +1,6 @@
 class Mos::Dataset < Mos::Model
+  FULL_DATASET_IDS = [2781, 619, 611, 526, 493, 629].freeze
+
   has_many :mos_rows, class_name: 'Mos::Row', foreign_key: :mos_dataset_id
 
   def json_data

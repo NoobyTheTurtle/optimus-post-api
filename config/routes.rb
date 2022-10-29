@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   # root "articles#index"
   namespace :api do
     namespace :v1 do
-      resources :districts, only: :index
+      resources :districts, only: :index do
+        resources :areas, only: :index
+      end
       resources :areas, only: :show
     end
   end
