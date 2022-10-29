@@ -1,24 +1,61 @@
 version: '3'
 
 services:
+  app:
+    container_name: optimus-post-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    depends_on:
+      - postgres
+      - redis
+      - sidekiq
+    restart: always
+    env_file: .env
+    tty: true
+    stdin_open: true
+
+  sidekiq:
+    container_name: optimus-post-sidekiq
+    build:
+      context: .
+    env_file:
+      - .env
+    command: 'bash -c "bundle exec sidekiq -C config/sidekiq.yml"'
+    volumes:
+      - .:/app
+    privileged: true
+    depends_on:
+      - postgres
+      - redis
+    restart: always
+
   postgres:
     container_name: optimus-post-postgres
     image: postgres:15.0
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - DATABASE_PASSWORD=$DATABASE_PASSWORD
+      - DATABASE_USER=$DATABASE_USER
     restart: always
     ports:
-      - "127.0.0.1:5432:5432"
+      - "5432:5432"
 
   redis:
     container_name: optimus-post-redis
     image: redis:7.0
     restart: always
-    environment:
-      - REDIS_PASSWORD=$REDIS_PASSWORD
     ports:
       - "127.0.0.1:6379:6379"
+
+volumes:
+  db_data:
+

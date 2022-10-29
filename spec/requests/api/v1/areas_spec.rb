@@ -2,7 +2,7 @@ require 'swagger_helper'
 
 RSpec.describe 'Areas API', type: :request do
 
-  path 'areas/{id}' do
+  path '/areas/{id}' do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('Show area') do

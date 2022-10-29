@@ -1,7 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'Districts API', type: :request do
-  path 'districts' do
+  path '/districts' do
     get('List districts') do
       response(200, 'Successful') do
         before { create_list(:district, 3) }

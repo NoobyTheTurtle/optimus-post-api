@@ -13,9 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  if Rails.env.development?
-    mount Sidekiq::Web => '/sidekiq'
-    mount Rswag::Ui::Engine => '/api-docs'
-    mount Rswag::Api::Engine => '/api-docs'
-  end
+  mount Sidekiq::Web => '/sidekiq'
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
 end

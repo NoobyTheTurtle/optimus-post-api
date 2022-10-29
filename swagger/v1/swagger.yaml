@@ -5,7 +5,7 @@ info:
   version: v1
   description: This is the first version of API
 paths:
-  areas/{id}:
+  "/areas/{id}":
     parameters:
     - name: id
       in: path
@@ -20,7 +20,7 @@ paths:
           description: Successful
         '404':
           description: Not found
-  districts:
+  "/districts":
     get:
       summary: List districts
       responses:
