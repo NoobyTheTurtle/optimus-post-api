@@ -118,7 +118,7 @@ RSpec.configure do |config|
           url: 'http://{defaultHost}/api/v1',
           variables: {
             defaultHost: {
-              default: Rails.env == 'production' ? '188.72.109.162:3000' : 'localhost:3000'
+              default: '188.72.109.162:3000'
             }
           }
         }
