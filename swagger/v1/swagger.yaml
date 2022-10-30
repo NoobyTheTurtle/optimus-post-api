@@ -6,6 +6,45 @@ info:
   description: This is the first version of API
 components:
   schemas:
+    district_with_polygon:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        short_name:
+          type: string
+        square:
+          type: number
+        population:
+          type: integer
+        2gis_id:
+          type: integer
+        polygon:
+          type: array
+          items:
+            type: array
+            items:
+              type: array
+              items:
+                type: number
+        polygon_type:
+          type: integer
+        center_coord:
+          type: array
+          items:
+            type: number
+      required:
+      - id
+      - name
+      - short_name
+      - square
+      - population
+      - 2gis_id
+      - polygon
+      - polygon_type
+      - center_coord
     district:
       type: object
       properties:
@@ -19,12 +58,63 @@ components:
           type: number
         population:
           type: integer
+        2gis_id:
+          type: integer
       required:
       - id
       - name
       - short_name
       - square
       - population
+      - 2gis_id
+    area_with_polygon:
+      type: object
+      properties:
+        id:
+          type: integer
+        population:
+          type: integer
+        name:
+          type: string
+        square:
+          type: number
+        population_density:
+          type: number
+        square_housing_stock:
+          type: number
+        living_square_per_person:
+          type: number
+        district_id:
+          type: integer
+        2gis_id:
+          type: integer
+        polygon:
+          type: array
+          items:
+            type: array
+            items:
+              type: array
+              items:
+                type: number
+        polygon_type:
+          type: integer
+        center_coord:
+          type: array
+          items:
+            type: number
+      required:
+      - id
+      - population
+      - square
+      - name
+      - population_density
+      - square_housing_stock
+      - living_square_per_person
+      - district_id
+      - 2gis_id
+      - polygon
+      - polygon_type
+      - center_coord
     area:
       type: object
       properties:
@@ -44,6 +134,8 @@ components:
           type: number
         district_id:
           type: integer
+        2gis_id:
+          type: integer
       required:
       - id
       - population
@@ -53,6 +145,7 @@ components:
       - square_housing_stock
       - living_square_per_person
       - district_id
+      - 2gis_id
 paths:
   "/areas/{id}":
     parameters:
@@ -74,16 +167,26 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 6
-                    population: 763051
-                    square: 15.16
-                    name: Boehm Neck
-                    population_density: 28.21
-                    square_housing_stock: 12.05
-                    living_square_per_person: 73.71
-                    district_id: 6
+                    id: 31
+                    population: 778081
+                    square: 12588.38
+                    name: Lulu Fords
+                    population_density: 80.26
+                    square_housing_stock: 39.17
+                    living_square_per_person: 83.44
+                    district_id: 37
+                    2gis_id: 8713143230
+                    polygon:
+                    - - - 60015.042351
+                        - 94681.777927
+                      - - 72126.134948
+                        - 18726.300777
+                    polygon_type: 1
+                    center_coord:
+                    - 58665.102339
+                    - 59534.279837
               schema:
-                "$ref": "#/components/schemas/area"
+                "$ref": "#/components/schemas/area_with_polygon"
         '404':
           description: Not found
   "/districts/{district_id}/areas":
@@ -106,38 +209,24 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 7
-                    population: 962665
-                    square: 65.21
-                    name: Sparkle Mountain
-                    population_density: 25.99
-                    square_housing_stock: 53.82
-                    living_square_per_person: 48.92
-                    district_id: 7
-                  - id: 8
-                    population: 432073
-                    square: 95.28
-                    name: Maximo Vista
-                    population_density: 70.81
-                    square_housing_stock: 41.68
-                    living_square_per_person: 75.38
-                    district_id: 7
-                  - id: 9
-                    population: 722607
-                    square: 21.84
-                    name: Wilford Squares
-                    population_density: 46.86
-                    square_housing_stock: 58.94
-                    living_square_per_person: 86.87
-                    district_id: 7
-                  - id: 10
-                    population: 678263
-                    square: 20.14
-                    name: Criselda Cliff
-                    population_density: 57.84
-                    square_housing_stock: 25.87
-                    living_square_per_person: 27.21
-                    district_id: 7
+                  - id: 34
+                    population: 371589
+                    square: 89743.79
+                    name: Bradtke Island
+                    population_density: 98.64
+                    square_housing_stock: 30.26
+                    living_square_per_person: 89.28
+                    district_id: 40
+                    2gis_id: 1035110292
+                  - id: 35
+                    population: 995649
+                    square: 28778.84
+                    name: Alden Forest
+                    population_density: 14.98
+                    square_housing_stock: 91.15
+                    living_square_per_person: 53.18
+                    district_id: 40
+                    2gis_id: 9557101512
               schema:
                 type: array
                 items:
@@ -155,27 +244,63 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 8
-                    name: Gail Walks
-                    short_name: NH
-                    square: 51.94
-                    population: 969929
-                  - id: 9
-                    name: Murazik Extension
-                    short_name: WV
-                    square: 27.15
-                    population: 963728
-                  - id: 10
-                    name: Dorian Ports
-                    short_name: MT
-                    square: 34.34
-                    population: 981255
+                  - id: 41
+                    name: Langosh Viaduct
+                    short_name: AL
+                    square: 56.27
+                    population: 247619
+                    2gis_id: 6454439098
+                  - id: 42
+                    name: Carol Squares
+                    short_name: WI
+                    square: 85.77
+                    population: 847714
+                    2gis_id: 5268146393
               schema:
                 type: array
                 items:
                   "$ref": "#/components/schemas/district"
+  "/districts/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show district by id
+      tags:
+      - Districts
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                    id: 43
+                    name: Afton Curve
+                    short_name: OK
+                    square: 99.18
+                    population: 276244
+                    2gis_id: 7584922592
+                    polygon:
+                    - - - 45559.714283
+                        - 37803.186526
+                      - - 52083.732369
+                        - 95932.798325
+                    polygon_type: 0
+                    center_coord:
+                    - 50247.709872
+                    - 34858.089812
+              schema:
+                "$ref": "#/components/schemas/district_with_polygon"
+        '404':
+          description: Not found
 servers:
 - url: http://{defaultHost}/api/v1
   variables:
     defaultHost:
-      default: 188.72.109.162:3000
+      default: localhost:3000

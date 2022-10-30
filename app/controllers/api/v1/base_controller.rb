@@ -9,7 +9,7 @@ class Api::V1::BaseController < ActionController::API
   end
 
   def show
-    render json: @resource, serializer:, status: :ok
+    render json: @resource, serializer:, status: :ok, method: :show
   end
 
   protected

@@ -11,15 +11,19 @@ RSpec.describe 'Areas API', type: :request do
       consumes 'application/json'
 
       response(200, 'Successful') do
-        let(:id) { create(:area).id }
+        let(:area) { create(:area) }
+        let(:id) { area.id }
 
-        schema '$ref' => '#/components/schemas/area'
+        schema '$ref' => '#/components/schemas/area_with_polygon'
 
         include_context 'with integration test'
 
         run_test! do
-          area = JSON.parse(response.body)
-          expect(area['id']).to eq(id)
+          body = JSON.parse(response.body)
+          expect(body['id']).to eq(id)
+          expect(body['polygon_type']).to eq(area.polygon_type)
+          expect(body['polygon']).to eq(JSON.parse(area.polygon))
+          expect(body['center_coord']).to eq(JSON.parse(area.center_coord))
         end
       end
 
@@ -44,14 +48,17 @@ RSpec.describe 'Areas API', type: :request do
 
         schema type: :array, items: { '$ref' => '#/components/schemas/area' }
 
-        before { create_list(:area, 4, district:) }
+        before do
+          create_list(:area, 2)
+          create_list(:area, 2, district:)
+        end
 
         include_context 'with integration test'
 
         run_test! do |response|
           data = JSON.parse(response.body)
           expect(data.map { |area| area['district_id'] }.uniq.first).to eq(district_id)
-          expect(data.size).to eq(4)
+          expect(data.size).to eq(2)
         end
       end
     end

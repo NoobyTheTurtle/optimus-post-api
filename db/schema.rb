@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_29_165305) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_30_180949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_165305) do
     t.bigint "district_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "2gis_id"
+    t.text "polygon"
+    t.integer "polygon_type"
+    t.string "center_coord"
     t.index ["district_id"], name: "index_areas_on_district_id"
   end
 
@@ -62,6 +66,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_165305) do
     t.integer "population"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "2gis_id"
+    t.text "polygon"
+    t.integer "polygon_type"
+    t.string "center_coord"
   end
 
   create_table "mos_culture_houses", force: :cascade do |t|

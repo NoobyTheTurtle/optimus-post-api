@@ -24,6 +24,33 @@ RSpec.configure do |config|
       },
       components: {
         schemas: {
+          district_with_polygon: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+              name: { type: 'string' },
+              short_name: { type: 'string' },
+              square: { type: 'number' },
+              population: { type: 'integer' },
+              '2gis_id': { type: 'integer' },
+              polygon: {
+                type: 'array',
+                items: {
+                  type: 'array',
+                  items: {
+                    type: 'array',
+                    items: { type: 'number' }
+                  }
+                }
+              },
+              polygon_type: { type: 'integer' },
+              center_coord: {
+                type: 'array',
+                items: { type: 'number' }
+              }
+            },
+            required: %w[id name short_name square population 2gis_id polygon polygon_type center_coord]
+          },
           district: {
             type: 'object',
             properties: {
@@ -31,9 +58,41 @@ RSpec.configure do |config|
               name: { type: 'string' },
               short_name: { type: 'string' },
               square: { type: 'number' },
-              population: { type: 'integer' }
+              population: { type: 'integer' },
+              '2gis_id': { type: 'integer' }
             },
-            required: %w[id name short_name square population]
+            required: %w[id name short_name square population 2gis_id]
+          },
+          area_with_polygon: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+              population: { type: 'integer' },
+              name: { type: 'string' },
+              square: { type: 'number' },
+              population_density: { type: 'number' },
+              square_housing_stock: { type: 'number' },
+              living_square_per_person: { type: 'number' },
+              district_id: { type: 'integer' },
+              '2gis_id': { type: 'integer' },
+              polygon: {
+                type: 'array',
+                items: {
+                  type: 'array',
+                  items: {
+                    type: 'array',
+                    items: { type: 'number' }
+                  }
+                }
+              },
+              polygon_type: { type: 'integer' },
+              center_coord: {
+                type: 'array',
+                items: { type: 'number' }
+              }
+            },
+            required: %w[id population square name population_density square_housing_stock living_square_per_person
+                         district_id 2gis_id polygon polygon_type center_coord]
           },
           area: {
             type: 'object',
@@ -45,9 +104,11 @@ RSpec.configure do |config|
               population_density: { type: 'number' },
               square_housing_stock: { type: 'number' },
               living_square_per_person: { type: 'number' },
-              district_id: { type: 'integer' }
+              district_id: { type: 'integer' },
+              '2gis_id': { type: 'integer' }
             },
-            required: %w[id population square name population_density square_housing_stock living_square_per_person district_id]
+            required: %w[id population square name population_density square_housing_stock living_square_per_person
+                         district_id 2gis_id]
           }
         }
       },
@@ -57,7 +118,7 @@ RSpec.configure do |config|
           url: 'http://{defaultHost}/api/v1',
           variables: {
             defaultHost: {
-              default: '188.72.109.162:3000'
+              default: Rails.env == 'production' ? '188.72.109.162:3000' : 'localhost:3000'
             }
           }
         }
