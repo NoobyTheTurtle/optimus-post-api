@@ -47,9 +47,10 @@ RSpec.configure do |config|
               center_coord: {
                 type: 'array',
                 items: { type: 'number' }
-              }
+              },
+              automatic_post_office_stats: { '$ref' => '#/components/schemas/automatic_post_office_stats' }
             },
-            required: %w[id name short_name square population 2gis_id polygon polygon_type center_coord]
+            required: %w[id name short_name square population 2gis_id polygon polygon_type center_coord automatic_post_office_stats]
           },
           district: {
             type: 'object',
@@ -59,9 +60,10 @@ RSpec.configure do |config|
               short_name: { type: 'string' },
               square: { type: 'number' },
               population: { type: 'integer' },
-              '2gis_id': { type: 'integer' }
+              '2gis_id': { type: 'integer' },
+              automatic_post_office_stats: { '$ref' => '#/components/schemas/automatic_post_office_stats' }
             },
-            required: %w[id name short_name square population 2gis_id]
+            required: %w[id name short_name square population 2gis_id automatic_post_office_stats]
           },
           area_with_polygon: {
             type: 'object',
@@ -90,10 +92,11 @@ RSpec.configure do |config|
                 type: 'array',
                 items: { type: 'number' }
               },
-              emblem_url: { type: 'string' }
+              emblem_url: { type: 'string' },
+              automatic_post_office_stats: { '$ref' => '#/components/schemas/automatic_post_office_stats' }
             },
             required: %w[id population square name population_density square_housing_stock living_square_per_person
-                         district_id 2gis_id emblem_url polygon polygon_type center_coord]
+                         district_id 2gis_id emblem_url polygon polygon_type center_coord automatic_post_office_stats]
           },
           area: {
             type: 'object',
@@ -107,10 +110,68 @@ RSpec.configure do |config|
               living_square_per_person: { type: 'number' },
               district_id: { type: 'integer' },
               '2gis_id': { type: 'integer' },
-              emblem_url: { type: 'string' }
+              emblem_url: { type: 'string' },
+              automatic_post_office_stats: { '$ref' => '#/components/schemas/automatic_post_office_stats' }
             },
             required: %w[id population square name population_density square_housing_stock living_square_per_person
-                         district_id 2gis_id emblem_url]
+                         district_id 2gis_id emblem_url automatic_post_office_stats]
+          },
+          placement_object_type: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+              name: { type: 'string' }
+            },
+            required: %w[id name]
+          },
+          automatic_post_office: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+              geo_data: {
+                type: 'array',
+                items: { type: 'number' }
+              },
+              area_id: { type: 'integer' },
+              is_placed: { type: 'boolean' },
+              address: { type: 'string' },
+              placement_object_type_id: { type: 'integer' },
+              people_in_range: { type: 'integer' },
+              distance_to_metro: { type: 'integer' },
+              distance_to_bus: { type: 'integer' },
+              predict_a: { type: 'number' },
+              predict_b: { type: 'number' },
+              predict_c: { type: 'number' }
+            },
+            required: %w[geo_data area_id is_placed address placement_object_type_id people_in_range distance_to_metro
+                         distance_to_bus predict_a predict_b predict_c]
+          },
+          meta: {
+            type: 'object',
+            properties: {
+              current_page: { type: 'integer' },
+              next_page: { oneOf: [{ type: 'integer' }, { type: 'null' }] },
+              prev_page: { oneOf: [{ type: 'integer' }, { type: 'null' }] },
+              total_pages: { type: 'integer' },
+              total_count: { type: 'integer' }
+            },
+            required: %w[current_page next_page prev_page total_pages total_count]
+          },
+          automatic_post_office_stats: {
+            type: 'object',
+            properties: {
+              placed: { type: 'integer' },
+              not_placed: { type: 'integer' }
+            },
+            required: %w[placed not_placed]
+          },
+          automatic_post_office_with_meta: {
+            type: 'object',
+            properties: {
+              automatic_post_offices: { type: :array, items: { '$ref' => '#/components/schemas/automatic_post_office' } },
+              meta: { '$ref' => '#/components/schemas/meta' }
+            },
+            required: %w[automatic_post_offices]
           }
         }
       },

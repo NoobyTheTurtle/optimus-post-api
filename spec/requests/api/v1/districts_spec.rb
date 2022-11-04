@@ -11,7 +11,7 @@ RSpec.describe 'Districts API', type: :request do
 
       response(200, 'Successful') do
         before { create_list(:district, 2) }
-        include_context 'with integration test'
+        include_context 'with save example response'
 
         schema type: :array, items: { '$ref' => '#/components/schemas/district' }
 
@@ -24,7 +24,7 @@ RSpec.describe 'Districts API', type: :request do
   end
 
   path '/districts/{id}' do
-    parameter name: 'id', in: :path, type: :string, description: 'id'
+    parameter name: 'id', in: :path, type: :number, description: 'District id'
 
     get('Show district by id') do
       tags 'Districts'
@@ -37,7 +37,7 @@ RSpec.describe 'Districts API', type: :request do
 
         schema '$ref' => '#/components/schemas/district_with_polygon'
 
-        include_context 'with integration test'
+        include_context 'with save example response'
 
         run_test! do
           body = JSON.parse(response.body)

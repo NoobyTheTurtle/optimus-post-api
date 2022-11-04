@@ -37,4 +37,22 @@ FactoryBot.define do
       area.save
     end
   end
+
+  factory :placement_object_type do
+    name { Faker::Company.industry }
+  end
+
+  factory :automatic_post_office do
+    geo_data { [Faker::Number.decimal(r_digits: 6), Faker::Number.decimal(r_digits: 6)] }
+    area { create(:area) }
+    is_placed { [true, false].sample }
+    address { Faker::Address.full_address }
+    placement_object_type { create(:placement_object_type) }
+    people_in_range { Faker::Number.number(digits: 5) }
+    distance_to_metro { Faker::Number.number(digits: 3) }
+    distance_to_bus { Faker::Number.number(digits: 3) }
+    predict_a { Faker::Number.decimal(r_digits: 3) }
+    predict_b { Faker::Number.decimal(r_digits: 3) }
+    predict_c { Faker::Number.decimal(r_digits: 3) }
+  end
 end

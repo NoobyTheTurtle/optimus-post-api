@@ -44,6 +44,7 @@ gem 'faraday', '~> 2.6'
 gem 'rswag', '~> 2.7'
 gem 'rubyzip', '~> 2.3'
 gem 'sidekiq', '~> 6.5'
+gem "kaminari", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

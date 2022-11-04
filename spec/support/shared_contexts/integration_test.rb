@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-shared_context 'with integration test' do
+shared_context 'with save example response' do
   after do |example|
     content = example.metadata[:response][:content] || {}
     example_spec = {

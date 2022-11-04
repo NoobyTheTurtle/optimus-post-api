@@ -3,7 +3,7 @@ require 'swagger_helper'
 RSpec.describe 'Areas API', type: :request do
 
   path '/areas/{id}' do
-    parameter name: 'id', in: :path, type: :string, description: 'id'
+    parameter name: 'id', in: :path, type: :number, description: 'id'
 
     get('Show area by id') do
       tags 'Areas'
@@ -16,7 +16,7 @@ RSpec.describe 'Areas API', type: :request do
 
         schema '$ref' => '#/components/schemas/area_with_polygon'
 
-        include_context 'with integration test'
+        include_context 'with save example response'
 
         run_test! do
           body = JSON.parse(response.body)
@@ -35,7 +35,7 @@ RSpec.describe 'Areas API', type: :request do
   end
 
   path '/districts/{district_id}/areas' do
-    parameter name: 'district_id', in: :path, type: :string, description: 'district_id'
+    parameter name: 'district_id', in: :path, type: :number, description: 'District id'
 
     get('Array areas by district') do
       tags 'Areas'
@@ -53,7 +53,7 @@ RSpec.describe 'Areas API', type: :request do
           create_list(:area, 2, district:)
         end
 
-        include_context 'with integration test'
+        include_context 'with save example response'
 
         run_test! do |response|
           data = JSON.parse(response.body)

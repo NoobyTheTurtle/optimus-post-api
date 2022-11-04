@@ -35,6 +35,8 @@ components:
           type: array
           items:
             type: number
+        automatic_post_office_stats:
+          "$ref": "#/components/schemas/automatic_post_office_stats"
       required:
       - id
       - name
@@ -45,6 +47,7 @@ components:
       - polygon
       - polygon_type
       - center_coord
+      - automatic_post_office_stats
     district:
       type: object
       properties:
@@ -60,6 +63,8 @@ components:
           type: integer
         2gis_id:
           type: integer
+        automatic_post_office_stats:
+          "$ref": "#/components/schemas/automatic_post_office_stats"
       required:
       - id
       - name
@@ -67,6 +72,7 @@ components:
       - square
       - population
       - 2gis_id
+      - automatic_post_office_stats
     area_with_polygon:
       type: object
       properties:
@@ -104,6 +110,8 @@ components:
             type: number
         emblem_url:
           type: string
+        automatic_post_office_stats:
+          "$ref": "#/components/schemas/automatic_post_office_stats"
       required:
       - id
       - population
@@ -118,6 +126,7 @@ components:
       - polygon
       - polygon_type
       - center_coord
+      - automatic_post_office_stats
     area:
       type: object
       properties:
@@ -141,6 +150,8 @@ components:
           type: integer
         emblem_url:
           type: string
+        automatic_post_office_stats:
+          "$ref": "#/components/schemas/automatic_post_office_stats"
       required:
       - id
       - population
@@ -152,6 +163,102 @@ components:
       - district_id
       - 2gis_id
       - emblem_url
+      - automatic_post_office_stats
+    placement_object_type:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+      - id
+      - name
+    automatic_post_office:
+      type: object
+      properties:
+        id:
+          type: integer
+        geo_data:
+          type: array
+          items:
+            type: number
+        area_id:
+          type: integer
+        is_placed:
+          type: boolean
+        address:
+          type: string
+        placement_object_type_id:
+          type: integer
+        people_in_range:
+          type: integer
+        distance_to_metro:
+          type: integer
+        distance_to_bus:
+          type: integer
+        predict_a:
+          type: number
+        predict_b:
+          type: number
+        predict_c:
+          type: number
+      required:
+      - geo_data
+      - area_id
+      - is_placed
+      - address
+      - placement_object_type_id
+      - people_in_range
+      - distance_to_metro
+      - distance_to_bus
+      - predict_a
+      - predict_b
+      - predict_c
+    meta:
+      type: object
+      properties:
+        current_page:
+          type: integer
+        next_page:
+          oneOf:
+          - type: integer
+          - type: 'null'
+        prev_page:
+          oneOf:
+          - type: integer
+          - type: 'null'
+        total_pages:
+          type: integer
+        total_count:
+          type: integer
+      required:
+      - current_page
+      - next_page
+      - prev_page
+      - total_pages
+      - total_count
+    automatic_post_office_stats:
+      type: object
+      properties:
+        placed:
+          type: integer
+        not_placed:
+          type: integer
+      required:
+      - placed
+      - not_placed
+    automatic_post_office_with_meta:
+      type: object
+      properties:
+        automatic_post_offices:
+          type: array
+          items:
+            "$ref": "#/components/schemas/automatic_post_office"
+        meta:
+          "$ref": "#/components/schemas/meta"
+      required:
+      - automatic_post_offices
 paths:
   "/areas/{id}":
     parameters:
@@ -160,7 +267,7 @@ paths:
       description: id
       required: true
       schema:
-        type: string
+        type: number
     get:
       summary: Show area by id
       tags:
@@ -173,25 +280,28 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 1
-                    population: 617896
-                    square: 52191.78
-                    name: Dorine Garden
-                    population_density: 34.64
-                    square_housing_stock: 84.86
-                    living_square_per_person: 90.27
-                    district_id: 1
-                    2gis_id: 8444642792
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--92836fbc23990e7111fe308ab6f8cf1903dc4f96/emblem.png
+                    id: 194
+                    population: 892520
+                    square: 16865.95
+                    name: Narcisa Trafficway
+                    population_density: 57.17
+                    square_housing_stock: 12.12
+                    living_square_per_person: 69.78
+                    district_id: 200
+                    2gis_id: 8932554276
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBY0k9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--e22d2e8d4d40e8730f12add2439f3146127014b3/emblem.png
+                    automatic_post_office_stats:
+                      placed: 0
+                      not_placed: 0
                     polygon:
-                    - - - 25778.716485
-                        - 76700.375921
-                      - - 70902.092687
-                        - 43498.493228
+                    - - - 86327.030572
+                        - 20610.080019
+                      - - 95724.157167
+                        - 81046.115652
                     polygon_type: 1
                     center_coord:
-                    - 14194.092086
-                    - 65665.927568
+                    - 99590.791873
+                    - 15469.370144
               schema:
                 "$ref": "#/components/schemas/area_with_polygon"
         '404':
@@ -200,10 +310,10 @@ paths:
     parameters:
     - name: district_id
       in: path
-      description: district_id
+      description: District id
       required: true
       schema:
-        type: string
+        type: number
     get:
       summary: Array areas by district
       tags:
@@ -216,30 +326,157 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 4
-                    population: 840817
-                    square: 94313.69
-                    name: Huels Points
-                    population_density: 87.27
-                    square_housing_stock: 27.14
-                    living_square_per_person: 25.59
-                    district_id: 4
-                    2gis_id: 1476753949
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--26cdb2240b64ed4bc6a8b34c259fbee6142897ae/emblem.png
-                  - id: 5
-                    population: 540927
-                    square: 96958.85
-                    name: Oscar Circles
-                    population_density: 92.76
-                    square_housing_stock: 23.14
-                    living_square_per_person: 42.93
-                    district_id: 4
-                    2gis_id: 3773505410
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--76aba94711d43b8186be73df811f19fc35e40aae/emblem.png
+                  - id: 197
+                    population: 648177
+                    square: 19727.06
+                    name: Ty Flat
+                    population_density: 66.37
+                    square_housing_stock: 54.73
+                    living_square_per_person: 84.89
+                    district_id: 203
+                    2gis_id: 4503016449
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBY1U9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--defcbc3dee2da1ef49667c92c47419448a133a27/emblem.png
+                    automatic_post_office_stats:
+                      placed: 0
+                      not_placed: 0
+                  - id: 198
+                    population: 423975
+                    square: 10521.46
+                    name: Ortiz Point
+                    population_density: 46.99
+                    square_housing_stock: 88.91
+                    living_square_per_person: 55.19
+                    district_id: 203
+                    2gis_id: 8576227787
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBY1k9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--76d95a718216c8e7c1907717a080a1a97cad6774/emblem.png
+                    automatic_post_office_stats:
+                      placed: 0
+                      not_placed: 0
               schema:
                 type: array
                 items:
                   "$ref": "#/components/schemas/area"
+  "/automatic_post_offices/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: number
+    get:
+      summary: Show automatic post office by id
+      tags:
+      - Automatic post offices
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                    id: 170
+                    geo_data:
+                    - 38330.035799
+                    - 96948.031511
+                    area_id: 199
+                    is_placed: false
+                    address: 534 Izola Lake, South Dennyton, TN 15820
+                    placement_object_type_id: 176
+                    people_in_range: 53193
+                    distance_to_metro: 429
+                    distance_to_bus: 558
+                    predict_a: 88009.106
+                    predict_b: 14910.847
+                    predict_c: 52527.153
+              schema:
+                "$ref": "#/components/schemas/automatic_post_office"
+        '404':
+          description: Not found
+  "/automatic_post_offices":
+    get:
+      summary: Array automatic post offices with pagination
+      tags:
+      - Automatic post offices
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        example: 1
+        schema:
+          type: number
+      - name: per_page
+        in: query
+        description: Number of elements per page
+        required: false
+        example: 1
+        schema:
+          type: number
+      - name: area_id
+        in: query
+        description: Filter by area id
+        required: false
+        schema:
+          type: number
+      - name: district_id
+        in: query
+        description: Filter by district id
+        required: false
+        schema:
+          type: number
+      - name: placement_object_type_id
+        in: query
+        description: Filter by placement object type id
+        required: false
+        schema:
+          type: number
+      - name: is_placed
+        in: query
+        description: Automatic post office is placed?
+        required: false
+        schema:
+          type: boolean
+      - name: sort
+        in: query
+        description: 'Sorting by object fields. Before field: ''+'' or nothing ->
+          ASC, ''-'' -> DESC'
+        required: false
+        example: "-distance_to_metro,distance_to_bus,+predict_a"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful with pagination
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/automatic_post_office_with_meta"
+              examples:
+                test_example:
+                  value:
+                    automatic_post_offices:
+                    - id: 197
+                      geo_data:
+                      - 34386.579756
+                      - 57500.898948
+                      area_id: 225
+                      is_placed: true
+                      address: Apt. 416 65706 Rebbeca Landing, Sporerborough, MO 11063-0938
+                      placement_object_type_id: 202
+                      people_in_range: 28497
+                      distance_to_metro: 363
+                      distance_to_bus: 724
+                      predict_a: 61153.151
+                      predict_b: 20137.882
+                      predict_c: 58323.485
+                    meta:
+                      current_page: 1
+                      next_page: 2
+                      prev_page:
+                      total_pages: 2
+                      total_count: 2
   "/districts":
     get:
       summary: Array districts
@@ -253,18 +490,24 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 5
-                    name: Runte Track
-                    short_name: MO
-                    square: 23.14
-                    population: 667121
-                    2gis_id: 4080024936
-                  - id: 6
-                    name: Sanford Row
-                    short_name: IL
-                    square: 44.46
-                    population: 595172
-                    2gis_id: 5970796376
+                  - id: 231
+                    name: White Square
+                    short_name: MA
+                    square: 18.14
+                    population: 927409
+                    2gis_id: 7680513544
+                    automatic_post_office_stats:
+                      placed: 0
+                      not_placed: 0
+                  - id: 232
+                    name: Jami Stravenue
+                    short_name: UT
+                    square: 11.68
+                    population: 336733
+                    2gis_id: 2285683510
+                    automatic_post_office_stats:
+                      placed: 0
+                      not_placed: 0
               schema:
                 type: array
                 items:
@@ -273,10 +516,10 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
+      description: District id
       required: true
       schema:
-        type: string
+        type: number
     get:
       summary: Show district by id
       tags:
@@ -289,25 +532,49 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 7
-                    name: Jerome Manors
-                    short_name: CA
-                    square: 63.76
-                    population: 194535
-                    2gis_id: 4009662230
+                    id: 233
+                    name: Akilah Brooks
+                    short_name: TN
+                    square: 92.73
+                    population: 404606
+                    2gis_id: 4084116779
+                    automatic_post_office_stats:
+                      placed: 0
+                      not_placed: 0
                     polygon:
-                    - - - 39411.573934
-                        - 69696.311539
-                      - - 67415.564999
-                        - 78147.723606
-                    polygon_type: 0
+                    - - - 75886.212783
+                        - 68204.103296
+                      - - 45199.605661
+                        - 16628.592575
+                    polygon_type: 1
                     center_coord:
-                    - 47779.103706
-                    - 35310.498521
+                    - 46466.204008
+                    - 94227.153143
               schema:
                 "$ref": "#/components/schemas/district_with_polygon"
         '404':
           description: Not found
+  "/placement_object_types":
+    get:
+      summary: Array placement object types
+      tags:
+      - Automatic post offices
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                  - id: 204
+                    name: Luxury Goods & Jewelry
+                  - id: 205
+                    name: Sports
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/placement_object_type"
 servers:
 - url: http://{defaultHost}/api/v1
   variables:

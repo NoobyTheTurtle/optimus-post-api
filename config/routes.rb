@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       resources :districts, only: %i[index show] do
         resources :areas, only: :index
       end
+      resources :placement_object_types, only: :index
+      resources :automatic_post_offices, only: %i[index show]
       resources :areas, only: :show
     end
   end

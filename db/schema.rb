@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_04_045656) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_04_180342) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,6 +57,31 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_045656) do
     t.integer "polygon_type"
     t.string "center_coord"
     t.index ["district_id"], name: "index_areas_on_district_id"
+  end
+
+  create_table "automatic_post_offices", force: :cascade do |t|
+    t.float "geo_data", default: [], array: true
+    t.bigint "area_id"
+    t.boolean "is_placed", default: false
+    t.string "address"
+    t.bigint "placement_object_type_id"
+    t.integer "people_in_range"
+    t.integer "distance_to_metro"
+    t.integer "distance_to_bus"
+    t.float "predict_a"
+    t.float "predict_b"
+    t.float "predict_c"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["area_id"], name: "index_automatic_post_offices_on_area_id"
+    t.index ["distance_to_bus"], name: "index_automatic_post_offices_on_distance_to_bus"
+    t.index ["distance_to_metro"], name: "index_automatic_post_offices_on_distance_to_metro"
+    t.index ["is_placed"], name: "index_automatic_post_offices_on_is_placed"
+    t.index ["people_in_range"], name: "index_automatic_post_offices_on_people_in_range"
+    t.index ["placement_object_type_id"], name: "index_automatic_post_offices_on_placement_object_type_id"
+    t.index ["predict_a"], name: "index_automatic_post_offices_on_predict_a"
+    t.index ["predict_b"], name: "index_automatic_post_offices_on_predict_b"
+    t.index ["predict_c"], name: "index_automatic_post_offices_on_predict_c"
   end
 
   create_table "districts", force: :cascade do |t|
@@ -246,6 +271,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_045656) do
     t.index ["mos_dataset_id"], name: "index_mos_sports_facilities_on_mos_dataset_id"
   end
 
+  create_table "placement_object_types", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "vacuum_cleaner_statuses", force: :cascade do |t|
     t.integer "successful", default: [], array: true
     t.integer "failed", default: [], array: true
@@ -257,6 +286,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_045656) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "areas", "districts"
+  add_foreign_key "automatic_post_offices", "areas"
+  add_foreign_key "automatic_post_offices", "placement_object_types"
   add_foreign_key "mos_culture_houses", "mos_datasets"
   add_foreign_key "mos_kiosks", "mos_datasets"
   add_foreign_key "mos_libraries", "mos_datasets"
