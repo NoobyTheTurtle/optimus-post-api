@@ -102,6 +102,8 @@ components:
           type: array
           items:
             type: number
+        emblem_url:
+          type: string
       required:
       - id
       - population
@@ -112,6 +114,7 @@ components:
       - living_square_per_person
       - district_id
       - 2gis_id
+      - emblem_url
       - polygon
       - polygon_type
       - center_coord
@@ -136,6 +139,8 @@ components:
           type: integer
         2gis_id:
           type: integer
+        emblem_url:
+          type: string
       required:
       - id
       - population
@@ -146,6 +151,7 @@ components:
       - living_square_per_person
       - district_id
       - 2gis_id
+      - emblem_url
 paths:
   "/areas/{id}":
     parameters:
@@ -167,24 +173,25 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 36
-                    population: 953668
-                    square: 62659.93
-                    name: Guillermo Islands
-                    population_density: 78.82
-                    square_housing_stock: 41.55
-                    living_square_per_person: 27.79
-                    district_id: 44
-                    2gis_id: 7431719650
+                    id: 1
+                    population: 617896
+                    square: 52191.78
+                    name: Dorine Garden
+                    population_density: 34.64
+                    square_housing_stock: 84.86
+                    living_square_per_person: 90.27
+                    district_id: 1
+                    2gis_id: 8444642792
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--92836fbc23990e7111fe308ab6f8cf1903dc4f96/emblem.png
                     polygon:
-                    - - - 98733.828539
-                        - 15441.773766
-                      - - 15985.605221
-                        - 85575.505393
-                    polygon_type: 0
+                    - - - 25778.716485
+                        - 76700.375921
+                      - - 70902.092687
+                        - 43498.493228
+                    polygon_type: 1
                     center_coord:
-                    - 59948.674288
-                    - 96385.572875
+                    - 14194.092086
+                    - 65665.927568
               schema:
                 "$ref": "#/components/schemas/area_with_polygon"
         '404':
@@ -209,24 +216,26 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 39
-                    population: 119909
-                    square: 51788.65
-                    name: Bette Mission
-                    population_density: 88.66
-                    square_housing_stock: 70.72
-                    living_square_per_person: 16.11
-                    district_id: 47
-                    2gis_id: 9278207423
-                  - id: 40
-                    population: 963356
-                    square: 64455.44
-                    name: Rowe Key
-                    population_density: 94.86
-                    square_housing_stock: 90.61
-                    living_square_per_person: 85.17
-                    district_id: 47
-                    2gis_id: 5235868138
+                  - id: 4
+                    population: 840817
+                    square: 94313.69
+                    name: Huels Points
+                    population_density: 87.27
+                    square_housing_stock: 27.14
+                    living_square_per_person: 25.59
+                    district_id: 4
+                    2gis_id: 1476753949
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--26cdb2240b64ed4bc6a8b34c259fbee6142897ae/emblem.png
+                  - id: 5
+                    population: 540927
+                    square: 96958.85
+                    name: Oscar Circles
+                    population_density: 92.76
+                    square_housing_stock: 23.14
+                    living_square_per_person: 42.93
+                    district_id: 4
+                    2gis_id: 3773505410
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--76aba94711d43b8186be73df811f19fc35e40aae/emblem.png
               schema:
                 type: array
                 items:
@@ -244,18 +253,18 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 48
-                    name: Reinger Throughway
-                    short_name: OK
-                    square: 84.62
-                    population: 317204
-                    2gis_id: 9165034846
-                  - id: 49
-                    name: Neal Stravenue
-                    short_name: NJ
-                    square: 92.42
-                    population: 711359
-                    2gis_id: 3404533862
+                  - id: 5
+                    name: Runte Track
+                    short_name: MO
+                    square: 23.14
+                    population: 667121
+                    2gis_id: 4080024936
+                  - id: 6
+                    name: Sanford Row
+                    short_name: IL
+                    square: 44.46
+                    population: 595172
+                    2gis_id: 5970796376
               schema:
                 type: array
                 items:
@@ -280,21 +289,21 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 50
-                    name: Sawayn Prairie
-                    short_name: PA
-                    square: 94.59
-                    population: 603761
-                    2gis_id: 2301859815
+                    id: 7
+                    name: Jerome Manors
+                    short_name: CA
+                    square: 63.76
+                    population: 194535
+                    2gis_id: 4009662230
                     polygon:
-                    - - - 41533.058587
-                        - 63902.835575
-                      - - 91352.659461
-                        - 12636.383697
-                    polygon_type: 1
+                    - - - 39411.573934
+                        - 69696.311539
+                      - - 67415.564999
+                        - 78147.723606
+                    polygon_type: 0
                     center_coord:
-                    - 30418.165018
-                    - 93607.706632
+                    - 47779.103706
+                    - 35310.498521
               schema:
                 "$ref": "#/components/schemas/district_with_polygon"
         '404':

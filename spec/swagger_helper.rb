@@ -89,10 +89,11 @@ RSpec.configure do |config|
               center_coord: {
                 type: 'array',
                 items: { type: 'number' }
-              }
+              },
+              emblem_url: { type: 'string' }
             },
             required: %w[id population square name population_density square_housing_stock living_square_per_person
-                         district_id 2gis_id polygon polygon_type center_coord]
+                         district_id 2gis_id emblem_url polygon polygon_type center_coord]
           },
           area: {
             type: 'object',
@@ -105,10 +106,11 @@ RSpec.configure do |config|
               square_housing_stock: { type: 'number' },
               living_square_per_person: { type: 'number' },
               district_id: { type: 'integer' },
-              '2gis_id': { type: 'integer' }
+              '2gis_id': { type: 'integer' },
+              emblem_url: { type: 'string' }
             },
             required: %w[id population square name population_density square_housing_stock living_square_per_person
-                         district_id 2gis_id]
+                         district_id 2gis_id emblem_url]
           }
         }
       },

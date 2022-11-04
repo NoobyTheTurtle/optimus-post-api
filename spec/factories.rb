@@ -30,5 +30,11 @@ FactoryBot.define do
       [[[Faker::Number.decimal(r_digits: 6), Faker::Number.decimal(r_digits: 6)],
         [Faker::Number.decimal(r_digits: 6), Faker::Number.decimal(r_digits: 6)]]]
     end
+
+    to_create do |area|
+      emblem_file = File.open("#{Rails.root}/spec/support/fixtures/emblem.png")
+      area.emblem.attach(io: emblem_file, filename: 'emblem.png')
+      area.save
+    end
   end
 end

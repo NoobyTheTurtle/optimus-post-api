@@ -1,4 +1,6 @@
 class ActiveModelSerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
+
   attributes :id
 
   def method_show?

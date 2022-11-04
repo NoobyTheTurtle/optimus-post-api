@@ -269,10 +269,12 @@ areas_data = [
 
 areas_data.each do |data|
   area = Area.find_or_initialize_by(data)
-  file_path = "#{Rails.root}/tmp/area_emblems/#{data[:id]}.png"
-  if File.exist?(file_path)
-    area.emblem.attach(io: File.open(file_path), filename: "#{data[:id]}.png",
-                       content_type: 'application/png')
+  svg_file_path = "#{Rails.root}/tmp/area_emblems/#{data[:id]}.svg"
+  png_file_path = "#{Rails.root}/tmp/area_emblems/#{data[:id]}.png"
+  if File.exist?(svg_file_path)
+    area.emblem.attach(io: File.open(svg_file_path), filename: "#{data[:id]}.svg", content_type: 'application/svg')
+  elsif File.exist?(png_file_path)
+    area.emblem.attach(io: File.open(png_file_path), filename: "#{data[:id]}.png", content_type: 'application/png')
   end
   area.save
 end
