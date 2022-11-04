@@ -31,4 +31,4 @@
 /.env
 /.idea
 .DS_Store
-init.sql
+/db/initial_data/*
