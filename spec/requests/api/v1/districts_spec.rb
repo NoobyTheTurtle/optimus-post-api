@@ -24,7 +24,7 @@ RSpec.describe 'Districts API', type: :request do
   end
 
   path '/districts/{id}' do
-    parameter name: 'id', in: :path, type: :number, description: 'District id'
+    parameter name: 'id', in: :path, type: :integer, description: 'District id'
 
     get('Show district by id') do
       tags 'Districts'

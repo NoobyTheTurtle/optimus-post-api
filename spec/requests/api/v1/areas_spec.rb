@@ -3,7 +3,7 @@ require 'swagger_helper'
 RSpec.describe 'Areas API', type: :request do
 
   path '/areas/{id}' do
-    parameter name: 'id', in: :path, type: :number, description: 'id'
+    parameter name: 'id', in: :path, type: :integer, description: 'id'
 
     get('Show area by id') do
       tags 'Areas'
@@ -35,7 +35,7 @@ RSpec.describe 'Areas API', type: :request do
   end
 
   path '/districts/{district_id}/areas' do
-    parameter name: 'district_id', in: :path, type: :number, description: 'District id'
+    parameter name: 'district_id', in: :path, type: :integer, description: 'District id'
 
     get('Array areas by district') do
       tags 'Areas'

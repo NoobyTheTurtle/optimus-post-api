@@ -267,7 +267,7 @@ paths:
       description: id
       required: true
       schema:
-        type: number
+        type: integer
     get:
       summary: Show area by id
       tags:
@@ -280,28 +280,28 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 507
-                    population: 240014
-                    square: 85290.16
-                    name: Сосновая пл.
-                    population_density: 83.62
-                    square_housing_stock: 81.49
-                    living_square_per_person: 43.72
-                    district_id: 522
-                    2gis_id: 9838922285
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdnNCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--6e13a8ac21bbf3a5527fc71e1848f8fb7b50e355/emblem.png
+                    id: 1474
+                    population: 995859
+                    square: 57526.15
+                    name: Заречная ул.
+                    population_density: 38.26
+                    square_housing_stock: 73.08
+                    living_square_per_person: 16.99
+                    district_id: 1514
+                    2gis_id: 1032812942
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBc0lGIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--a4953926d34cdc1d2faca35c27a88eb2544d6a1c/emblem.png
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
                     polygon:
-                    - - - 27336.590837
-                        - 51054.173253
-                      - - 31317.881854
-                        - 44153.541166
-                    polygon_type: 1
+                    - - - 18894.008474
+                        - 39656.248649
+                      - - 63020.093941
+                        - 26847.467783
+                    polygon_type: 0
                     center_coord:
-                    - 82013.380588
-                    - 82265.087724
+                    - 39475.898786
+                    - 28925.682111
               schema:
                 "$ref": "#/components/schemas/area_with_polygon"
         '404':
@@ -313,7 +313,7 @@ paths:
       description: District id
       required: true
       schema:
-        type: number
+        type: integer
     get:
       summary: Array areas by district
       tags:
@@ -326,29 +326,29 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 510
-                    population: 649678
-                    square: 31988.27
-                    name: Молодежная проспект
-                    population_density: 89.85
-                    square_housing_stock: 91.66
-                    living_square_per_person: 34.25
-                    district_id: 525
-                    2gis_id: 3858235144
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdjRCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--1e5fdb85c9d8b1805688945941d0b7ab1bc458be/emblem.png
+                  - id: 1477
+                    population: 362640
+                    square: 31549.51
+                    name: проспект Береговая
+                    population_density: 54.13
+                    square_housing_stock: 86.13
+                    living_square_per_person: 90.13
+                    district_id: 1517
+                    2gis_id: 5650682929
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBc1VGIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--a5836acd1d53481d2de1147190c6c3053c38901b/emblem.png
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
-                  - id: 511
-                    population: 554031
-                    square: 58747.16
-                    name: Сосновая ул.
-                    population_density: 88.39
-                    square_housing_stock: 57.33
-                    living_square_per_person: 88.11
-                    district_id: 525
-                    2gis_id: 4877239928
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdjhCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--1546d24abffc1d73ce3de9b5f7ef30fc72b6140b/emblem.png
+                  - id: 1478
+                    population: 924096
+                    square: 39320.67
+                    name: Дзержинского площадь
+                    population_density: 30.75
+                    square_housing_stock: 19.31
+                    living_square_per_person: 94.06
+                    district_id: 1517
+                    2gis_id: 4425328681
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBc1lGIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2851e4e5e55447c389326b8850a7f903deb8783f/emblem.png
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
@@ -376,119 +376,74 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 447
+                    id: 1314
                     geo_data:
-                    - 16343.510113
-                    - 91033.052807
-                    area_id: 512
+                    - 25594.203578
+                    - 35706.730514
+                    area_id: 1479
                     is_placed: true
-                    address: 959883 Россия, Уфа, пр. Вокзальная, 590
-                    placement_object_type_id: 462
-                    people_in_range: 93215
-                    distance_to_metro: 523
-                    distance_to_bus: 194
-                    predict_a: 35915.483
-                    predict_b: 68450.318
-                    predict_c: 56991.305
+                    address: 925676 Россия, Ижевск, Трудовая ул., 318
+                    placement_object_type_id: 1354
+                    people_in_range: 92861
+                    distance_to_metro: 590
+                    distance_to_bus: 325
+                    predict_a: 71700.901
+                    predict_b: 97790.179
+                    predict_c: 91366.324
               schema:
                 "$ref": "#/components/schemas/automatic_post_office"
         '404':
           description: Not found
   "/automatic_post_offices/export_xlsx":
-    get:
+    post:
       summary: Export xlsx file with automatic post offices data
       tags:
       - Automatic post offices
-      parameters:
-      - name: area_id
-        in: query
-        description: Filter by area id
-        required: false
-        schema:
-          type: number
-      - name: district_id
-        in: query
-        description: Filter by district id
-        required: false
-        schema:
-          type: number
-      - name: placement_object_type_id
-        in: query
-        description: Filter by placement object type id
-        required: false
-        schema:
-          type: number
-      - name: is_placed
-        in: query
-        description: Automatic post office is placed?
-        required: false
-        schema:
-          type: boolean
-      - name: sort
-        in: query
-        description: 'Sorting by object fields. Before field: ''+'' or nothing ->
-          ASC, ''-'' -> DESC'
-        required: false
-        example: "-distance_to_metro,distance_to_bus,+predict_a"
-        schema:
-          type: string
+      parameters: []
       responses:
         '404':
           description: Not found
         '200':
           description: Successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Filter by array automatic post office id's
+                  example: []
+                area_id:
+                  type: integer
+                  description: Filter by area id
+                  example: 1
+                district_id:
+                  type: integer
+                  description: Filter by district id
+                  example: 7
+                placement_object_type_id:
+                  type: integer
+                  description: Filter by placement object type id
+                  example: 3
+                is_placed:
+                  type: boolean
+                  description: Automatic post office is placed?
+                sort:
+                  type: string
+                  description: 'Sorting by object fields. Before field: ''+'' or nothing
+                    -> ASC, ''-'' -> DESC'
+                  example: "-distance_to_metro,distance_to_bus,+predict_a"
+        description: Filters
   "/automatic_post_offices":
-    get:
+    post:
       summary: Array automatic post offices with pagination
       tags:
       - Automatic post offices
-      parameters:
-      - name: page
-        in: query
-        description: Page number
-        required: false
-        example: 1
-        schema:
-          type: number
-      - name: per_page
-        in: query
-        description: Number of elements per page
-        required: false
-        example: 1
-        schema:
-          type: number
-      - name: area_id
-        in: query
-        description: Filter by area id
-        required: false
-        schema:
-          type: number
-      - name: district_id
-        in: query
-        description: Filter by district id
-        required: false
-        schema:
-          type: number
-      - name: placement_object_type_id
-        in: query
-        description: Filter by placement object type id
-        required: false
-        schema:
-          type: number
-      - name: is_placed
-        in: query
-        description: Automatic post office is placed?
-        required: false
-        schema:
-          type: boolean
-      - name: sort
-        in: query
-        description: 'Sorting by object fields. Before field: ''+'' or nothing ->
-          ASC, ''-'' -> DESC'
-        required: false
-        example: "-distance_to_metro,distance_to_bus,+predict_a"
-        schema:
-          type: string
+      parameters: []
       responses:
         '200':
           description: Successful with pagination
@@ -500,26 +455,68 @@ paths:
                 test_example:
                   value:
                     automatic_post_offices:
-                    - id: 476
+                    - id: 1347
                       geo_data:
-                      - 46589.274687
-                      - 27889.421502
-                      area_id: 540
-                      is_placed: false
-                      address: 524536 Россия, Омск, пл. Октябрьская, 845 кв. 212
-                      placement_object_type_id: 490
-                      people_in_range: 42735
-                      distance_to_metro: 941
-                      distance_to_bus: 653
-                      predict_a: 13048.487
-                      predict_b: 39384.378
-                      predict_c: 85121.077
+                      - 59347.567927
+                      - 59463.617355
+                      area_id: 1511
+                      is_placed: true
+                      address: 253677 Россия, Брянск, проспект Комсомольская, 344
+                        кв. 257
+                      placement_object_type_id: 1386
+                      people_in_range: 83966
+                      distance_to_metro: 799
+                      distance_to_bus: 732
+                      predict_a: 82047.652
+                      predict_b: 18901.198
+                      predict_c: 87068.096
                     meta:
                       current_page: 1
                       next_page: 2
                       prev_page:
                       total_pages: 2
                       total_count: 2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Filter by array automatic post office id's
+                  example: []
+                page:
+                  type: integer
+                  description: Page number
+                  example: 1
+                per_page:
+                  type: integer
+                  description: Number of elements per page
+                  example: 1
+                area_id:
+                  type: integer
+                  description: Filter by area id
+                  example: 1
+                district_id:
+                  type: integer
+                  description: Filter by district id
+                  example: 7
+                placement_object_type_id:
+                  type: integer
+                  description: Filter by placement object type id
+                  example: 3
+                is_placed:
+                  type: boolean
+                  description: Automatic post office is placed?
+                sort:
+                  type: string
+                  description: 'Sorting by object fields. Before field: ''+'' or nothing
+                    -> ASC, ''-'' -> DESC'
+                  example: "-distance_to_metro,distance_to_bus,+predict_a"
+        description: Filters
   "/districts":
     get:
       summary: Array districts
@@ -533,21 +530,21 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 555
-                    name: площадь Заречная
-                    short_name: AZ
-                    square: 10.13
-                    population: 888626
-                    2gis_id: 9554758284
+                  - id: 1551
+                    name: Молодежная площадь
+                    short_name: WA
+                    square: 27.09
+                    population: 585298
+                    2gis_id: 9937860228
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
-                  - id: 556
-                    name: пл. Свободы
-                    short_name: GA
-                    square: 51.16
-                    population: 580071
-                    2gis_id: 6883795555
+                  - id: 1552
+                    name: пр. Майская
+                    short_name: WA
+                    square: 99.91
+                    population: 881755
+                    2gis_id: 9114354949
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
@@ -562,7 +559,7 @@ paths:
       description: District id
       required: true
       schema:
-        type: number
+        type: integer
     get:
       summary: Show district by id
       tags:
@@ -575,24 +572,24 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 557
-                    name: улица Полевая
-                    short_name: DE
-                    square: 85.79
-                    population: 230026
-                    2gis_id: 7867859421
+                    id: 1553
+                    name: Кооперативная проспект
+                    short_name: KS
+                    square: 37.87
+                    population: 175043
+                    2gis_id: 5817306647
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
                     polygon:
-                    - - - 36855.330323
-                        - 63675.352639
-                      - - 99984.913896
-                        - 64700.336089
-                    polygon_type: 0
+                    - - - 97290.751084
+                        - 51140.752349
+                      - - 22163.694047
+                        - 66376.635679
+                    polygon_type: 1
                     center_coord:
-                    - 52886.757063
-                    - 84550.627944
+                    - 96510.119916
+                    - 61434.102765
               schema:
                 "$ref": "#/components/schemas/district_with_polygon"
         '404':
@@ -610,10 +607,10 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 492
-                    name: Legal Services
-                  - id: 493
-                    name: Computer Networking
+                  - id: 1388
+                    name: Public Policy
+                  - id: 1389
+                    name: Wine and Spirits
               schema:
                 type: array
                 items:

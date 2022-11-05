@@ -5,10 +5,17 @@ class AutomaticPostOfficesFilter < BaseFilter
     @scope = filter_by_district_id(@scope)
     @scope = filter_by_placement_object_type_id(@scope)
     @scope = filter_by_is_placed(@scope)
+    @scope = filter_by_ids(@scope)
     super
   end
 
   private
+
+  def filter_by_ids(scope)
+    return scope unless @query_params[:ids].present?
+
+    scope.where(id: @query_params[:ids])
+  end
 
   def filter_by_area_id(scope)
     return scope unless @query_params[:area_id].present?
@@ -29,8 +36,8 @@ class AutomaticPostOfficesFilter < BaseFilter
   end
 
   def filter_by_is_placed(scope)
-    return scope unless @query_params[:is_placed].present? && %w[true false].include?(@query_params[:is_placed])
+    return scope unless [true, false].include?(@query_params[:is_placed])
 
-    scope.where(is_placed: @query_params[:is_placed] == 'true')
+    scope.where(is_placed: @query_params[:is_placed])
   end
 end

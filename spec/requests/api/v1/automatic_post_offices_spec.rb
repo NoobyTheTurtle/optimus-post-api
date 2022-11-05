@@ -33,19 +33,29 @@ RSpec.describe 'Automatic post office API', type: :request do
   end
 
   path '/automatic_post_offices/export_xlsx' do
-    get('Export xlsx file with automatic post offices data') do
+    post('Export xlsx file with automatic post offices data') do
       tags 'Automatic post offices'
-      produces 'application/json'
-      consumes 'application/octet-stream'
+      produces 'application/octet-stream'
+      consumes 'application/json'
 
-      parameter name: 'area_id', in: :query, type: :number, description: 'Filter by area id', required: false
-      parameter name: 'district_id', in: :query, type: :number, description: 'Filter by district id', required: false
-      parameter name: 'placement_object_type_id', in: :query, type: :number,
-                description: 'Filter by placement object type id', required: false
-      parameter name: 'is_placed', in: :query, type: :boolean, description: 'Automatic post office is placed?',
-                required: false
-      parameter name: 'sort', in: :query, type: :string, description: "Sorting by object fields. Before field: '+' or nothing -> ASC, '-' -> DESC", required: false,
-                example: '-distance_to_metro,distance_to_bus,+predict_a'
+      parameter name: :params, in: :body, schema: {
+        type: :object,
+        properties: {
+          ids: { type: :array, items: { type: :integer }, description: "Filter by array automatic post office id's",
+                 example: [] },
+          area_id: { type: :integer, description: 'Filter by area id', example: 1 },
+          district_id: { type: :integer, description: 'Filter by district id', example: 7 },
+          placement_object_type_id: { type: :integer, description: 'Filter by placement object type id', example: 3 },
+          is_placed: { type: :boolean, description: 'Automatic post office is placed?' },
+          sort: {
+            type: :string,
+            description: "Sorting by object fields. Before field: '+' or nothing -> ASC, '-' -> DESC",
+            example: '-distance_to_metro,distance_to_bus,+predict_a'
+          }
+        }
+      }, description: 'Filters'
+
+      let(:params) { {} }
 
       response(404, 'Not found') do
         run_test!
@@ -55,27 +65,35 @@ RSpec.describe 'Automatic post office API', type: :request do
         before { create_list(:automatic_post_office, 2) }
         run_test!
       end
-
     end
   end
 
   path '/automatic_post_offices' do
-    get('Array automatic post offices with pagination') do
+    post('Array automatic post offices with pagination') do
       tags 'Automatic post offices'
       produces 'application/json'
       consumes 'application/json'
 
-      parameter name: 'page', in: :query, type: :number, description: 'Page number', required: false, example: 1
-      parameter name: 'per_page', in: :query, type: :number, description: 'Number of elements per page',
-                required: false, example: 1
-      parameter name: 'area_id', in: :query, type: :number, description: 'Filter by area id', required: false
-      parameter name: 'district_id', in: :query, type: :number, description: 'Filter by district id', required: false
-      parameter name: 'placement_object_type_id', in: :query, type: :number,
-                description: 'Filter by placement object type id', required: false
-      parameter name: 'is_placed', in: :query, type: :boolean, description: 'Automatic post office is placed?',
-                required: false
-      parameter name: 'sort', in: :query, type: :string, description: "Sorting by object fields. Before field: '+' or nothing -> ASC, '-' -> DESC", required: false,
-                example: '-distance_to_metro,distance_to_bus,+predict_a'
+      parameter name: :params, in: :body, schema: {
+        type: :object,
+        properties: {
+          ids: { type: :array, items: { type: :integer }, description: "Filter by array automatic post office id's",
+                 example: [] },
+          page: { type: :integer, description: 'Page number', example: 1 },
+          per_page: { type: :integer, description: 'Number of elements per page', example: 1 },
+          area_id: { type: :integer, description: 'Filter by area id', example: 1 },
+          district_id: { type: :integer, description: 'Filter by district id', example: 7 },
+          placement_object_type_id: { type: :integer, description: 'Filter by placement object type id', example: 3 },
+          is_placed: { type: :boolean, description: 'Automatic post office is placed?' },
+          sort: {
+            type: :string,
+            description: "Sorting by object fields. Before field: '+' or nothing -> ASC, '-' -> DESC",
+            example: '-distance_to_metro,distance_to_bus,+predict_a'
+          }
+        }
+      }, description: 'Filters'
+
+      let(:params) { {} }
 
       response(200, 'Successful without pagination') do
         before { create_list(:automatic_post_office, 2) }
@@ -91,7 +109,7 @@ RSpec.describe 'Automatic post office API', type: :request do
 
       response(200, 'Successful with filtered by area_id ') do
         let(:area) { create(:area) }
-        let(:area_id) { area.id }
+        let(:params) { { area_id: area.id } }
 
         schema '$ref' => '#/components/schemas/automatic_post_office_with_meta'
 
@@ -108,7 +126,7 @@ RSpec.describe 'Automatic post office API', type: :request do
 
       response(200, 'Successful with filtered by district_id ') do
         let(:district) { create(:district) }
-        let(:district_id) { district.id }
+        let(:params) { { district_id: district.id } }
 
         before do
           create(:automatic_post_office, area: create(:area, district:))
@@ -127,7 +145,7 @@ RSpec.describe 'Automatic post office API', type: :request do
 
       response(200, 'Successful with filtered by placement_object_type_id ') do
         let(:placement_object_type) { create(:placement_object_type) }
-        let(:placement_object_type_id) { placement_object_type.id }
+        let(:params) { { placement_object_type_id: placement_object_type.id } }
 
         before do
           create_list(:automatic_post_office, 2, placement_object_type:)
@@ -144,6 +162,7 @@ RSpec.describe 'Automatic post office API', type: :request do
 
       response(200, 'Successful with filtered by is_placed') do
         let(:is_placed) { [true, false].sample }
+        let(:params) { { is_placed: } }
 
         before do
           create_list(:automatic_post_office, 2, is_placed:)
@@ -159,7 +178,7 @@ RSpec.describe 'Automatic post office API', type: :request do
       end
 
       response(200, 'Successful with sort ASC') do
-        let(:sort) { 'people_in_range' }
+        let(:params) { { sort: 'people_in_range' } }
         let(:array) { create_list(:automatic_post_office, 4) }
 
         before { array }
@@ -174,7 +193,7 @@ RSpec.describe 'Automatic post office API', type: :request do
       end
 
       response(200, 'Successful with sort DESC') do
-        let(:sort) { '-people_in_range' }
+        let(:params) { { sort: '-people_in_range' } }
         let(:array) { create_list(:automatic_post_office, 4) }
 
         before { array }
@@ -188,9 +207,23 @@ RSpec.describe 'Automatic post office API', type: :request do
         end
       end
 
+      response(200, 'Successful filtered by ids') do
+        let(:ids) { [create(:automatic_post_office).id, create(:automatic_post_office).id] }
+        let(:params) { { ids: } }
+        let(:array) { create_list(:automatic_post_office, 2) }
+
+        before { array }
+
+        schema '$ref' => '#/components/schemas/automatic_post_office_with_meta'
+
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect((data['automatic_post_offices'].map { |apo| apo['id'] } - ids).size).to eq(0)
+        end
+      end
+
       response(200, 'Successful with pagination') do
-        let(:page) { 1 }
-        let(:per_page) { 1 }
+        let(:params) { { page: 1, per_page: 1 } }
         before { create_list(:automatic_post_office, 2) }
 
         include_context 'with save example response'

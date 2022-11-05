@@ -8,8 +8,9 @@ Rails.application.routes.draw do
         resources :areas, only: :index
       end
       resources :placement_object_types, only: :index
-      resources :automatic_post_offices, only: %i[index show] do
-        get :export_xlsx, on: :collection
+      post :automatic_post_offices, to: 'automatic_post_offices#index'
+      resources :automatic_post_offices, only: :show do
+        post :export_xlsx, on: :collection
       end
       resources :areas, only: :show
     end
