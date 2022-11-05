@@ -39,13 +39,13 @@ gem 'image_processing', '~> 1.2'
 gem 'rack-cors'
 
 gem 'active_model_serializers', '~> 0.10.13'
-gem 'axlsx', '~> 1.3'
+gem 'axlsx', '~> 2.1.0.pre'
 gem 'dotenv-rails', '~> 2.8'
 gem 'faraday', '~> 2.6'
 gem 'kaminari', '~> 1.2'
 gem 'rswag', '~> 2.7'
+gem 'rubyzip', '~> 1.1.7'
 gem 'sidekiq', '~> 6.5'
-gem "rubyzip", "~> 2.3"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -61,4 +61,4 @@ group :development do
   gem 'rubocop', '~> 1.37'
 end
 
-gem "zip-zip", "~> 0.3"
+gem 'zip-zip', '~> 0.3'

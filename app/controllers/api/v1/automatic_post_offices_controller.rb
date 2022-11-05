@@ -13,16 +13,17 @@ module Api
       end
 
       def export_xlsx
-        filename = "#{Time.zone.now.strftime('%Y-%m-%d_%H:%M:%S')}_automatic_post_offices.xlsx"
+        @filename = "#{Time.zone.now.strftime('%Y-%m-%d_%H:%M:%S')}_automatic_post_offices.xlsx"
 
         list = @collection.includes(:placement_object_type, :district)
         if list.count > 0
-          file = XlsxGenerator::AutomaticPostOffices.call(list:, filename:)
-          send_data(file.to_stream.read, filename:)
-          File.delete(filename) if File.exist?(filename)
+          file = XlsxGenerator::AutomaticPostOffices.call(list:, filename: @filename)
+          send_data(file.to_stream.read, filename: @filename)
         else
           raise ActiveRecord::RecordNotFound
         end
+      ensure
+        File.delete(@filename) if File.exist?(@filename)
       end
 
       private
