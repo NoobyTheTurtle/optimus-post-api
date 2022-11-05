@@ -6,14 +6,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    command: 'bash -c "bundle install && bundle exec rails s -p 3000 -b 0.0.0.0"'
     volumes:
       - .:/app
+      - bundle_cache:/bundle_cache
     ports:
       - ${APP_PORT}:${APP_PORT}
     depends_on:
       - postgres
       - redis
       - sidekiq
+    environment:
+      - BUNDLE_PATH=/bundle_cache
     restart: always
     env_file: .env
     tty: true
@@ -25,10 +29,13 @@ services:
       context: .
     env_file:
       - .env
-    command: 'bash -c "bundle exec sidekiq -C config/sidekiq.yml"'
+    command: 'bash -c "bundle install && bundle exec sidekiq -C config/sidekiq.yml"'
     volumes:
       - .:/app
+      - bundle_cache:/bundle_cache
     privileged: true
+    environment:
+      - BUNDLE_PATH=/bundle_cache
     depends_on:
       - postgres
       - redis
@@ -56,6 +63,12 @@ services:
     ports:
       - "127.0.0.1:6379:6379"
 
+  bundle_cache:
+    image: busybox
+    volumes:
+      - bundle_cache:/bundle_cache
+
 volumes:
   db_data:
+  bundle_cache:
 

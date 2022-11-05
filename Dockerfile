@@ -22,7 +22,9 @@ RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 # Add our Gemfile and install gems
 ADD Gemfile* $APP_HOME/
-RUN bundle check || bundle install
+RUN gem update --system && \
+    gem update bundler && \
+    bundle check || bundle install --jobs 4 --retry 5
 # Copy over our application code
 ADD . $APP_HOME
 
