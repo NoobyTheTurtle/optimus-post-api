@@ -39,8 +39,8 @@ module Api
       end
 
       def collection
-        @collection ||= ::AutomaticPostOfficesFilter.call(::AutomaticPostOffice.all, filter_params,
-                                                          ordering_params(order_params))
+        @collection ||= ::AutomaticPostOfficesFilter.call(::AutomaticPostOffice.all, filter_params, ordering_params(order_params))
+                                                    .includes(:area)
       end
 
       def filter_params

@@ -185,6 +185,8 @@ components:
             type: number
         area_id:
           type: integer
+        area_name:
+          type: string
         is_placed:
           type: boolean
         address:
@@ -215,6 +217,7 @@ components:
       - predict_a
       - predict_b
       - predict_c
+      - area_name
     meta:
       type: object
       properties:
@@ -280,28 +283,28 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 1474
-                    population: 995859
-                    square: 57526.15
-                    name: Заречная ул.
-                    population_density: 38.26
-                    square_housing_stock: 73.08
-                    living_square_per_person: 16.99
-                    district_id: 1514
-                    2gis_id: 1032812942
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBc0lGIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--a4953926d34cdc1d2faca35c27a88eb2544d6a1c/emblem.png
+                    id: 1591
+                    population: 316801
+                    square: 62141.34
+                    name: Парковая ул.
+                    population_density: 69.75
+                    square_housing_stock: 65.75
+                    living_square_per_person: 54.05
+                    district_id: 1634
+                    2gis_id: 6984365844
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBamNHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--6390254958ec8e351d2e776d569ac776b48f344b/emblem.png
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
                     polygon:
-                    - - - 18894.008474
-                        - 39656.248649
-                      - - 63020.093941
-                        - 26847.467783
-                    polygon_type: 0
+                    - - - 53658.170438
+                        - 17697.389011
+                      - - 10726.502878
+                        - 51630.315464
+                    polygon_type: 1
                     center_coord:
-                    - 39475.898786
-                    - 28925.682111
+                    - 36063.446158
+                    - 27985.851449
               schema:
                 "$ref": "#/components/schemas/area_with_polygon"
         '404':
@@ -326,29 +329,29 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 1477
-                    population: 362640
-                    square: 31549.51
-                    name: проспект Береговая
-                    population_density: 54.13
-                    square_housing_stock: 86.13
-                    living_square_per_person: 90.13
-                    district_id: 1517
-                    2gis_id: 5650682929
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBc1VGIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--a5836acd1d53481d2de1147190c6c3053c38901b/emblem.png
+                  - id: 1594
+                    population: 119836
+                    square: 75720.57
+                    name: площадь Цветочная
+                    population_density: 13.99
+                    square_housing_stock: 41.65
+                    living_square_per_person: 75.02
+                    district_id: 1637
+                    2gis_id: 1890605279
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBam9HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--5d157714ebe9a066742cc6849834af8d1423195a/emblem.png
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
-                  - id: 1478
-                    population: 924096
-                    square: 39320.67
-                    name: Дзержинского площадь
-                    population_density: 30.75
-                    square_housing_stock: 19.31
-                    living_square_per_person: 94.06
-                    district_id: 1517
-                    2gis_id: 4425328681
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBc1lGIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2851e4e5e55447c389326b8850a7f903deb8783f/emblem.png
+                  - id: 1595
+                    population: 236591
+                    square: 67535.11
+                    name: пл. Весенняя
+                    population_density: 67.89
+                    square_housing_stock: 46.47
+                    living_square_per_person: 66.07
+                    district_id: 1637
+                    2gis_id: 8618619808
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBanNHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--b051ceba126e534db5624d815ac95a6962c8f6d8/emblem.png
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
@@ -376,20 +379,21 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 1314
+                    id: 1419
                     geo_data:
-                    - 25594.203578
-                    - 35706.730514
-                    area_id: 1479
+                    - 76573.689742
+                    - 40357.823435
+                    area_id: 1596
+                    area_name: Крупской ул.
                     is_placed: true
-                    address: 925676 Россия, Ижевск, Трудовая ул., 318
-                    placement_object_type_id: 1354
-                    people_in_range: 92861
-                    distance_to_metro: 590
-                    distance_to_bus: 325
-                    predict_a: 71700.901
-                    predict_b: 97790.179
-                    predict_c: 91366.324
+                    address: 124517 Россия, Чебоксары, пр. Весенняя, 392 кв. 884
+                    placement_object_type_id: 1462
+                    people_in_range: 63388
+                    distance_to_metro: 245
+                    distance_to_bus: 588
+                    predict_a: 72322.805
+                    predict_b: 32471.632
+                    predict_c: 51458.246
               schema:
                 "$ref": "#/components/schemas/automatic_post_office"
         '404':
@@ -455,21 +459,21 @@ paths:
                 test_example:
                   value:
                     automatic_post_offices:
-                    - id: 1347
+                    - id: 1452
                       geo_data:
-                      - 59347.567927
-                      - 59463.617355
-                      area_id: 1511
+                      - 97110.654104
+                      - 39036.009571
+                      area_id: 1628
+                      area_name: площадь Центральная
                       is_placed: true
-                      address: 253677 Россия, Брянск, проспект Комсомольская, 344
-                        кв. 257
-                      placement_object_type_id: 1386
-                      people_in_range: 83966
-                      distance_to_metro: 799
-                      distance_to_bus: 732
-                      predict_a: 82047.652
-                      predict_b: 18901.198
-                      predict_c: 87068.096
+                      address: 389942 Россия, Кемерово, Вокзальная пр., 252
+                      placement_object_type_id: 1494
+                      people_in_range: 25533
+                      distance_to_metro: 456
+                      distance_to_bus: 146
+                      predict_a: 64201.511
+                      predict_b: 83422.005
+                      predict_c: 84291.275
                     meta:
                       current_page: 1
                       next_page: 2
@@ -530,21 +534,21 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 1551
-                    name: Молодежная площадь
-                    short_name: WA
-                    square: 27.09
-                    population: 585298
-                    2gis_id: 9937860228
+                  - id: 1671
+                    name: проспект Южная
+                    short_name: TN
+                    square: 98.13
+                    population: 631982
+                    2gis_id: 5656772221
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
-                  - id: 1552
-                    name: пр. Майская
-                    short_name: WA
-                    square: 99.91
-                    population: 881755
-                    2gis_id: 9114354949
+                  - id: 1672
+                    name: Южная пр.
+                    short_name: NE
+                    square: 72.79
+                    population: 111885
+                    2gis_id: 9736382884
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
@@ -572,24 +576,24 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 1553
-                    name: Кооперативная проспект
-                    short_name: KS
-                    square: 37.87
-                    population: 175043
-                    2gis_id: 5817306647
+                    id: 1673
+                    name: Маяковского ул.
+                    short_name: ME
+                    square: 58.26
+                    population: 309472
+                    2gis_id: 6419321509
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
                     polygon:
-                    - - - 97290.751084
-                        - 51140.752349
-                      - - 22163.694047
-                        - 66376.635679
+                    - - - 50803.528355
+                        - 35455.906414
+                      - - 39433.486236
+                        - 75019.228879
                     polygon_type: 1
                     center_coord:
-                    - 96510.119916
-                    - 61434.102765
+                    - 60502.109179
+                    - 98969.693529
               schema:
                 "$ref": "#/components/schemas/district_with_polygon"
         '404':
@@ -607,10 +611,10 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 1388
-                    name: Public Policy
-                  - id: 1389
-                    name: Wine and Spirits
+                  - id: 1496
+                    name: Sporting Goods
+                  - id: 1497
+                    name: Cosmetics
               schema:
                 type: array
                 items:

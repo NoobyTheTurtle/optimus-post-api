@@ -133,6 +133,7 @@ RSpec.configure do |config|
                 items: { type: 'number' }
               },
               area_id: { type: 'integer' },
+              area_name: { type: 'string' },
               is_placed: { type: 'boolean' },
               address: { type: 'string' },
               placement_object_type_id: { type: 'integer' },
@@ -144,7 +145,7 @@ RSpec.configure do |config|
               predict_c: { type: 'number' }
             },
             required: %w[geo_data area_id is_placed address placement_object_type_id people_in_range distance_to_metro
-                         distance_to_bus predict_a predict_b predict_c]
+                         distance_to_bus predict_a predict_b predict_c area_name]
           },
           meta: {
             type: 'object',
