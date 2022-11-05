@@ -1,0 +1,17 @@
+ru:
+  automatic_post_office:
+    id: ID
+    automatic_post_offices: Постаматы
+    area: Район
+    district: Округ
+    is_placed: Размещён
+    true: Да
+    false: Нет
+    address: Адрес
+    placement_object_type: Тип объекта размещения
+    people_in_range: Людей в радиусе
+    distance_to_metro: Расстояние (м) до метро
+    distance_to_bus: Расстояние (м) до автобусной остановки
+    predict_a: Предсказание А
+    predict_b: Предсказание B
+    predict_c: Предсказание C

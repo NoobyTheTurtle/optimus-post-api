@@ -32,6 +32,33 @@ RSpec.describe 'Automatic post office API', type: :request do
     end
   end
 
+  path '/automatic_post_offices/export_xlsx' do
+    get('Export xlsx file with automatic post offices data') do
+      tags 'Automatic post offices'
+      produces 'application/json'
+      consumes 'application/octet-stream'
+
+      parameter name: 'area_id', in: :query, type: :number, description: 'Filter by area id', required: false
+      parameter name: 'district_id', in: :query, type: :number, description: 'Filter by district id', required: false
+      parameter name: 'placement_object_type_id', in: :query, type: :number,
+                description: 'Filter by placement object type id', required: false
+      parameter name: 'is_placed', in: :query, type: :boolean, description: 'Automatic post office is placed?',
+                required: false
+      parameter name: 'sort', in: :query, type: :string, description: "Sorting by object fields. Before field: '+' or nothing -> ASC, '-' -> DESC", required: false,
+                example: '-distance_to_metro,distance_to_bus,+predict_a'
+
+      response(404, 'Not found') do
+        run_test!
+      end
+
+      response(200, 'Successful') do
+        before { create_list(:automatic_post_office, 2) }
+        run_test!
+      end
+
+    end
+  end
+
   path '/automatic_post_offices' do
     get('Array automatic post offices with pagination') do
       tags 'Automatic post offices'
