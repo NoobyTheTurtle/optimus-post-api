@@ -30,6 +30,5 @@
 
 /.env
 /.idea
-.DS_Store
-/db/initial_data/*
-vendor/bundle/*
+/.DS_Store
+/vendor/bundle/*
