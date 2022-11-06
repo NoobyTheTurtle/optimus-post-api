@@ -5,4 +5,7 @@ class AutomaticPostOfficeSerializer < ActiveModelSerializer
   def area_name
     object.area&.name
   end
+  def district_id
+    object.area&.district_id
+  end
 end
