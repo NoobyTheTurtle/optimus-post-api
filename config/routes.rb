@@ -13,6 +13,9 @@ Rails.application.routes.draw do
         post :export_xlsx, on: :collection
       end
       resources :areas, only: :show
+      resources :users, only: %i[] do
+        post :login, on: :collection
+      end
     end
   end
 

@@ -1,14 +1,16 @@
 require 'swagger_helper'
 
 RSpec.describe 'Areas API', type: :request do
-
   path '/areas/{id}' do
     parameter name: 'id', in: :path, type: :integer, description: 'id'
+    let(:id) { 0 }
 
     get('Show area by id') do
       tags 'Areas'
       produces 'application/json'
       consumes 'application/json'
+
+      include_context 'with authorization'
 
       response(200, 'Successful') do
         let(:area) { create(:area) }
@@ -28,7 +30,6 @@ RSpec.describe 'Areas API', type: :request do
       end
 
       response(404, 'Not found') do
-        let(:id) { 0 }
         run_test!
       end
     end
@@ -41,6 +42,10 @@ RSpec.describe 'Areas API', type: :request do
       tags 'Areas'
       produces 'application/json'
       consumes 'application/json'
+
+      let(:district_id) { 0 }
+
+      include_context 'with authorization'
 
       response(200, 'Successful') do
         let(:district) { create(:district) }

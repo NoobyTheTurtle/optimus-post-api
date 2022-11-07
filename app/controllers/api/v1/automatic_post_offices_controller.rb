@@ -5,6 +5,7 @@ module Api
     class AutomaticPostOfficesController < Api::V1::BaseController
       include Orderable
 
+      before_action :authenticate_request!
       before_action :collection, only: %i[index export_xlsx]
 
       def index

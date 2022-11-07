@@ -9,6 +9,8 @@ RSpec.describe 'PlacementObjectTypes API', type: :request do
       produces 'application/json'
       consumes 'application/json'
 
+      include_context 'with authorization'
+
       response(200, 'Successful') do
         before { create_list(:placement_object_type, 2) }
         include_context 'with save example response'

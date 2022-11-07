@@ -5,11 +5,14 @@ require 'swagger_helper'
 RSpec.describe 'Automatic post office API', type: :request do
   path '/automatic_post_offices/{id}' do
     parameter name: 'id', in: :path, type: :number, description: 'id'
+    let(:id) { 0 }
 
     get('Show automatic post office by id') do
       tags 'Automatic post offices'
       produces 'application/json'
       consumes 'application/json'
+
+      include_context 'with authorization'
 
       response(200, 'Successful') do
         let(:automatic_post_office) { create(:automatic_post_office) }
@@ -26,7 +29,6 @@ RSpec.describe 'Automatic post office API', type: :request do
       end
 
       response(404, 'Not found') do
-        let(:id) { 0 }
         run_test!
       end
     end
@@ -37,7 +39,6 @@ RSpec.describe 'Automatic post office API', type: :request do
       tags 'Automatic post offices'
       produces 'application/octet-stream'
       consumes 'application/json'
-
       parameter name: :params, in: :body, schema: {
         type: :object,
         properties: {
@@ -57,6 +58,8 @@ RSpec.describe 'Automatic post office API', type: :request do
 
       let(:params) { {} }
 
+      include_context 'with authorization'
+
       response(404, 'Not found') do
         run_test!
       end
@@ -73,7 +76,6 @@ RSpec.describe 'Automatic post office API', type: :request do
       tags 'Automatic post offices'
       produces 'application/json'
       consumes 'application/json'
-
       parameter name: :params, in: :body, schema: {
         type: :object,
         properties: {
@@ -94,6 +96,8 @@ RSpec.describe 'Automatic post office API', type: :request do
       }, description: 'Filters'
 
       let(:params) { {} }
+
+      include_context 'with authorization'
 
       response(200, 'Successful without pagination') do
         before { create_list(:automatic_post_office, 2) }

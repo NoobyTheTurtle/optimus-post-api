@@ -9,6 +9,8 @@ RSpec.describe 'Districts API', type: :request do
       produces 'application/json'
       consumes 'application/json'
 
+      include_context 'with authorization'
+
       response(200, 'Successful') do
         before { create_list(:district, 2) }
         include_context 'with save example response'
@@ -25,11 +27,14 @@ RSpec.describe 'Districts API', type: :request do
 
   path '/districts/{id}' do
     parameter name: 'id', in: :path, type: :integer, description: 'District id'
+    let(:id) { 0 }
 
     get('Show district by id') do
       tags 'Districts'
       produces 'application/json'
       consumes 'application/json'
+
+      include_context 'with authorization'
 
       response(200, 'Successful') do
         let(:district) { create(:district) }
@@ -49,7 +54,6 @@ RSpec.describe 'Districts API', type: :request do
       end
 
       response(404, 'Not found') do
-        let(:id) { 0 }
         run_test!
       end
     end

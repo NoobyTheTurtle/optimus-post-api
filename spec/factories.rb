@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  factory :user do
+    email { Faker::Internet.email }
+    password { "#{Faker::Internet.password}!A3a" }
+    after :create, &:mark_as_confirmed!
+  end
+
   factory :district do
     short_name { Faker::Address.state_abbr }
     name { Faker::Address.street_name }

@@ -174,6 +174,14 @@ RSpec.configure do |config|
             },
             required: %w[automatic_post_offices]
           }
+        },
+        securitySchemes: {
+          Bearer: {
+            description: 'Authorization token',
+            type: :apiKey,
+            name: 'Authorization',
+            in: :header
+          }
         }
       },
       paths: {},

@@ -262,6 +262,12 @@ components:
           "$ref": "#/components/schemas/meta"
       required:
       - automatic_post_offices
+  securitySchemes:
+    Bearer:
+      description: Authorization token
+      type: apiKey
+      name: Authorization
+      in: header
 paths:
   "/areas/{id}":
     parameters:
@@ -275,6 +281,8 @@ paths:
       summary: Show area by id
       tags:
       - Areas
+      security:
+      - Bearer: {}
       responses:
         '200':
           description: Successful
@@ -283,28 +291,28 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 1591
-                    population: 316801
-                    square: 62141.34
-                    name: Парковая ул.
-                    population_density: 69.75
-                    square_housing_stock: 65.75
-                    living_square_per_person: 54.05
-                    district_id: 1634
-                    2gis_id: 6984365844
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBamNHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--6390254958ec8e351d2e776d569ac776b48f344b/emblem.png
+                    id: 2419
+                    population: 406711
+                    square: 68064.79
+                    name: улица Майская
+                    population_density: 62.02
+                    square_housing_stock: 86.47
+                    living_square_per_person: 21.53
+                    district_id: 2481
+                    2gis_id: 4860824664
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbk1KIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--3523ba7d7c86e0436266ee157cd1c1f20850834e/emblem.png
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
                     polygon:
-                    - - - 53658.170438
-                        - 17697.389011
-                      - - 10726.502878
-                        - 51630.315464
-                    polygon_type: 1
+                    - - - 61446.060079
+                        - 33117.630128
+                      - - 92958.249927
+                        - 30628.692148
+                    polygon_type: 0
                     center_coord:
-                    - 36063.446158
-                    - 27985.851449
+                    - 22205.793024
+                    - 19572.255183
               schema:
                 "$ref": "#/components/schemas/area_with_polygon"
         '404':
@@ -321,6 +329,8 @@ paths:
       summary: Array areas by district
       tags:
       - Areas
+      security:
+      - Bearer: {}
       responses:
         '200':
           description: Successful
@@ -329,29 +339,29 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 1594
-                    population: 119836
-                    square: 75720.57
-                    name: площадь Цветочная
-                    population_density: 13.99
-                    square_housing_stock: 41.65
-                    living_square_per_person: 75.02
-                    district_id: 1637
-                    2gis_id: 1890605279
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBam9HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--5d157714ebe9a066742cc6849834af8d1423195a/emblem.png
+                  - id: 2422
+                    population: 675906
+                    square: 39362.68
+                    name: Труда площадь
+                    population_density: 73.08
+                    square_housing_stock: 87.38
+                    living_square_per_person: 39.34
+                    district_id: 2484
+                    2gis_id: 2738094281
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbllKIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--98714cac05c4595b0c56e3ac40d46601a2137b97/emblem.png
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
-                  - id: 1595
-                    population: 236591
-                    square: 67535.11
-                    name: пл. Весенняя
-                    population_density: 67.89
-                    square_housing_stock: 46.47
-                    living_square_per_person: 66.07
-                    district_id: 1637
-                    2gis_id: 8618619808
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBanNHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--b051ceba126e534db5624d815ac95a6962c8f6d8/emblem.png
+                  - id: 2423
+                    population: 760523
+                    square: 28105.67
+                    name: площадь Строителей
+                    population_density: 11.73
+                    square_housing_stock: 60.41
+                    living_square_per_person: 39.63
+                    district_id: 2484
+                    2gis_id: 5234693452
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbmNKIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--27dfa6a8cc0f3b13699ed34cc81a82910bca2747/emblem.png
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
@@ -371,6 +381,8 @@ paths:
       summary: Show automatic post office by id
       tags:
       - Automatic post offices
+      security:
+      - Bearer: {}
       responses:
         '200':
           description: Successful
@@ -379,21 +391,22 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 1419
+                    id: 2171
                     geo_data:
-                    - 76573.689742
-                    - 40357.823435
-                    area_id: 1596
-                    area_name: Крупской ул.
+                    - 69426.895081
+                    - 73030.412111
+                    area_id: 2424
+                    area_name: пл. Солнечная
+                    district_id: 2485
                     is_placed: true
-                    address: 124517 Россия, Чебоксары, пр. Весенняя, 392 кв. 884
-                    placement_object_type_id: 1462
-                    people_in_range: 63388
-                    distance_to_metro: 245
-                    distance_to_bus: 588
-                    predict_a: 72322.805
-                    predict_b: 32471.632
-                    predict_c: 51458.246
+                    address: 214873 Россия, Новокузнецк, Лесная площадь, 953 кв. 404
+                    placement_object_type_id: 2257
+                    people_in_range: 13937
+                    distance_to_metro: 276
+                    distance_to_bus: 910
+                    predict_a: 72087.832
+                    predict_b: 10168.998
+                    predict_c: 93823.485
               schema:
                 "$ref": "#/components/schemas/automatic_post_office"
         '404':
@@ -404,6 +417,8 @@ paths:
       tags:
       - Automatic post offices
       parameters: []
+      security:
+      - Bearer: {}
       responses:
         '404':
           description: Not found
@@ -448,6 +463,8 @@ paths:
       tags:
       - Automatic post offices
       parameters: []
+      security:
+      - Bearer: {}
       responses:
         '200':
           description: Successful with pagination
@@ -459,21 +476,22 @@ paths:
                 test_example:
                   value:
                     automatic_post_offices:
-                    - id: 1452
+                    - id: 2204
                       geo_data:
-                      - 97110.654104
-                      - 39036.009571
-                      area_id: 1628
-                      area_name: площадь Центральная
+                      - 46649.860755
+                      - 24824.686703
+                      area_id: 2456
+                      area_name: Озерная улица
+                      district_id: 2516
                       is_placed: true
-                      address: 389942 Россия, Кемерово, Вокзальная пр., 252
-                      placement_object_type_id: 1494
-                      people_in_range: 25533
-                      distance_to_metro: 456
-                      distance_to_bus: 146
-                      predict_a: 64201.511
-                      predict_b: 83422.005
-                      predict_c: 84291.275
+                      address: 335990 Россия, Астрахань, ул. Почтовая, 468 кв. 311
+                      placement_object_type_id: 2289
+                      people_in_range: 55975
+                      distance_to_metro: 874
+                      distance_to_bus: 222
+                      predict_a: 78779.461
+                      predict_b: 69846.378
+                      predict_c: 73981.058
                     meta:
                       current_page: 1
                       next_page: 2
@@ -526,6 +544,8 @@ paths:
       summary: Array districts
       tags:
       - Districts
+      security:
+      - Bearer: {}
       responses:
         '200':
           description: Successful
@@ -534,21 +554,21 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 1671
-                    name: проспект Южная
-                    short_name: TN
-                    square: 98.13
-                    population: 631982
-                    2gis_id: 5656772221
+                  - id: 2518
+                    name: пр. Набережная
+                    short_name: AL
+                    square: 71.44
+                    population: 694679
+                    2gis_id: 1923069088
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
-                  - id: 1672
-                    name: Южная пр.
-                    short_name: NE
-                    square: 72.79
-                    population: 111885
-                    2gis_id: 9736382884
+                  - id: 2519
+                    name: Школьная площадь
+                    short_name: VT
+                    square: 81.16
+                    population: 507108
+                    2gis_id: 4589488040
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
@@ -568,6 +588,8 @@ paths:
       summary: Show district by id
       tags:
       - Districts
+      security:
+      - Bearer: {}
       responses:
         '200':
           description: Successful
@@ -576,24 +598,24 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 1673
-                    name: Маяковского ул.
-                    short_name: ME
-                    square: 58.26
-                    population: 309472
-                    2gis_id: 6419321509
+                    id: 2520
+                    name: площадь Суворова
+                    short_name: NJ
+                    square: 70.37
+                    population: 791387
+                    2gis_id: 6430837255
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
                     polygon:
-                    - - - 50803.528355
-                        - 35455.906414
-                      - - 39433.486236
-                        - 75019.228879
+                    - - - 16306.515689
+                        - 86693.477541
+                      - - 70812.981914
+                        - 91075.946001
                     polygon_type: 1
                     center_coord:
-                    - 60502.109179
-                    - 98969.693529
+                    - 92889.982564
+                    - 90774.069912
               schema:
                 "$ref": "#/components/schemas/district_with_polygon"
         '404':
@@ -603,6 +625,8 @@ paths:
       summary: Array placement object types
       tags:
       - Automatic post offices
+      security:
+      - Bearer: {}
       responses:
         '200':
           description: Successful
@@ -611,14 +635,53 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 1496
-                    name: Sporting Goods
-                  - id: 1497
-                    name: Cosmetics
+                  - id: 2291
+                    name: Pharmaceuticals
+                  - id: 2292
+                    name: Food & Beverages
               schema:
                 type: array
                 items:
                   "$ref": "#/components/schemas/placement_object_type"
+  "/users/login":
+    post:
+      summary: Authenticate user
+      tags:
+      - Authenticate
+      parameters: []
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                    auth_token: eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njg0NTg2MzgsImlzcyI6Imlzc3Vlcl9uYW1lIiwiYXVkIjoiY2xpZW50IiwidXNlcl9pZCI6MTI3M30.SC_Qs28iTQmXPKQ8gf70jRHYsEJJ24k7B3W_6cc6Ylg
+              schema:
+                auth_token:
+                  type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                test_example:
+                  value:
+                    error: Invalid username / password
+              schema:
+                error:
+                  type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
 servers:
 - url: http://{defaultHost}/api/v1
   variables:

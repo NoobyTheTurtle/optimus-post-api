@@ -16,6 +16,7 @@ module OptimusPost
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use config.session_store, config.session_options
     config.i18n.default_locale = :ru
+    config.autoload_paths += %W[#{config.root}/lib]
 
     # Configuration for the application, engines, and railties goes here.
     #

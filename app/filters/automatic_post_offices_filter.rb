@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AutomaticPostOfficesFilter < BaseFilter
   def call
     @scope = filter_by_area_id(@scope)
@@ -12,7 +13,7 @@ class AutomaticPostOfficesFilter < BaseFilter
   private
 
   def filter_by_ids(scope)
-    return scope unless @query_params[:ids].present?
+    return scope unless @query_params[:ids].present? && Array(@query_params[:ids]).length.positive?
 
     scope.where(id: @query_params[:ids])
   end
