@@ -291,28 +291,28 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 2419
-                    population: 406711
-                    square: 68064.79
-                    name: улица Майская
-                    population_density: 62.02
-                    square_housing_stock: 86.47
-                    living_square_per_person: 21.53
-                    district_id: 2481
-                    2gis_id: 4860824664
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbk1KIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--3523ba7d7c86e0436266ee157cd1c1f20850834e/emblem.png
+                    id: 2497
+                    population: 715970
+                    square: 67000.88
+                    name: Почтовая улица
+                    population_density: 82.34
+                    square_housing_stock: 70.97
+                    living_square_per_person: 51.88
+                    district_id: 2561
+                    2gis_id: 1567683590
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBc0VKIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--5dd9b14823f2ca03c0881ee0cceb006c17c7f4b3/emblem.png
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
                     polygon:
-                    - - - 61446.060079
-                        - 33117.630128
-                      - - 92958.249927
-                        - 30628.692148
-                    polygon_type: 0
+                    - - - 39139.535006
+                        - 26668.732183
+                      - - 36922.431964
+                        - 12760.640452
+                    polygon_type: 1
                     center_coord:
-                    - 22205.793024
-                    - 19572.255183
+                    - 23014.148952
+                    - 50364.706802
               schema:
                 "$ref": "#/components/schemas/area_with_polygon"
         '404':
@@ -339,29 +339,29 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 2422
-                    population: 675906
-                    square: 39362.68
-                    name: Труда площадь
-                    population_density: 73.08
-                    square_housing_stock: 87.38
-                    living_square_per_person: 39.34
-                    district_id: 2484
-                    2gis_id: 2738094281
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbllKIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--98714cac05c4595b0c56e3ac40d46601a2137b97/emblem.png
+                  - id: 2500
+                    population: 253734
+                    square: 46153.15
+                    name: Гоголя улица
+                    population_density: 67.07
+                    square_housing_stock: 43.38
+                    living_square_per_person: 76.99
+                    district_id: 2564
+                    2gis_id: 6639352779
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBc1FKIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--d7fbf56fba818830ae8ea8494991c73ee31e53ab/emblem.png
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
-                  - id: 2423
-                    population: 760523
-                    square: 28105.67
-                    name: площадь Строителей
-                    population_density: 11.73
-                    square_housing_stock: 60.41
-                    living_square_per_person: 39.63
-                    district_id: 2484
-                    2gis_id: 5234693452
-                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbmNKIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--27dfa6a8cc0f3b13699ed34cc81a82910bca2747/emblem.png
+                  - id: 2501
+                    population: 338769
+                    square: 15863.85
+                    name: Спортивная площадь
+                    population_density: 96.52
+                    square_housing_stock: 50.98
+                    living_square_per_person: 15.74
+                    district_id: 2564
+                    2gis_id: 8466899978
+                    emblem_url: http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBc1VKIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--66bdfb1c0c3c31f03cb53fb8ba85ab85f5372730/emblem.png
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
@@ -391,22 +391,22 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 2171
+                    id: 2241
                     geo_data:
-                    - 69426.895081
-                    - 73030.412111
-                    area_id: 2424
-                    area_name: пл. Солнечная
-                    district_id: 2485
-                    is_placed: true
-                    address: 214873 Россия, Новокузнецк, Лесная площадь, 953 кв. 404
-                    placement_object_type_id: 2257
-                    people_in_range: 13937
-                    distance_to_metro: 276
-                    distance_to_bus: 910
-                    predict_a: 72087.832
-                    predict_b: 10168.998
-                    predict_c: 93823.485
+                    - 42851.519732
+                    - 65796.886856
+                    area_id: 2502
+                    area_name: Советская ул.
+                    district_id: 2565
+                    is_placed: false
+                    address: 805630 Россия, Новокузнецк, ул. Рабочая, 948 кв. 311
+                    placement_object_type_id: 2329
+                    people_in_range: 86358
+                    distance_to_metro: 363
+                    distance_to_bus: 785
+                    predict_a: 22756.352
+                    predict_b: 28363.372
+                    predict_c: 15231.029
               schema:
                 "$ref": "#/components/schemas/automatic_post_office"
         '404':
@@ -476,22 +476,22 @@ paths:
                 test_example:
                   value:
                     automatic_post_offices:
-                    - id: 2204
+                    - id: 2274
                       geo_data:
-                      - 46649.860755
-                      - 24824.686703
-                      area_id: 2456
-                      area_name: Озерная улица
-                      district_id: 2516
-                      is_placed: true
-                      address: 335990 Россия, Астрахань, ул. Почтовая, 468 кв. 311
-                      placement_object_type_id: 2289
-                      people_in_range: 55975
-                      distance_to_metro: 874
-                      distance_to_bus: 222
-                      predict_a: 78779.461
-                      predict_b: 69846.378
-                      predict_c: 73981.058
+                      - 11336.963962
+                      - 38808.039931
+                      area_id: 2534
+                      area_name: Калинина ул.
+                      district_id: 2596
+                      is_placed: false
+                      address: 452689 Россия, Пермь, Солнечная улица, 609 кв. 230
+                      placement_object_type_id: 2361
+                      people_in_range: 96199
+                      distance_to_metro: 845
+                      distance_to_bus: 237
+                      predict_a: 19021.148
+                      predict_b: 34876.104
+                      predict_c: 69748.948
                     meta:
                       current_page: 1
                       next_page: 2
@@ -554,21 +554,21 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 2518
-                    name: пр. Набережная
-                    short_name: AL
-                    square: 71.44
-                    population: 694679
-                    2gis_id: 1923069088
+                  - id: 2598
+                    name: пр. Речная
+                    short_name: MA
+                    square: 66.74
+                    population: 507130
+                    2gis_id: 4336348234
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
-                  - id: 2519
-                    name: Школьная площадь
-                    short_name: VT
-                    square: 81.16
-                    population: 507108
-                    2gis_id: 4589488040
+                  - id: 2599
+                    name: проспект Солнечная
+                    short_name: MA
+                    square: 28.16
+                    population: 356473
+                    2gis_id: 2892357673
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
@@ -598,24 +598,24 @@ paths:
               examples:
                 test_example:
                   value:
-                    id: 2520
-                    name: площадь Суворова
-                    short_name: NJ
-                    square: 70.37
-                    population: 791387
-                    2gis_id: 6430837255
+                    id: 2600
+                    name: улица Садовая
+                    short_name: GA
+                    square: 92.43
+                    population: 706358
+                    2gis_id: 3351918352
                     automatic_post_office_stats:
                       placed: 0
                       not_placed: 0
                     polygon:
-                    - - - 16306.515689
-                        - 86693.477541
-                      - - 70812.981914
-                        - 91075.946001
+                    - - - 60662.475566
+                        - 63747.813156
+                      - - 38999.052882
+                        - 82294.208793
                     polygon_type: 1
                     center_coord:
-                    - 92889.982564
-                    - 90774.069912
+                    - 10707.225082
+                    - 95454.730703
               schema:
                 "$ref": "#/components/schemas/district_with_polygon"
         '404':
@@ -635,10 +635,10 @@ paths:
               examples:
                 test_example:
                   value:
-                  - id: 2291
-                    name: Pharmaceuticals
-                  - id: 2292
-                    name: Food & Beverages
+                  - id: 2363
+                    name: Business Supplies and Equipment
+                  - id: 2364
+                    name: Marketing and Advertising
               schema:
                 type: array
                 items:
@@ -657,7 +657,7 @@ paths:
               examples:
                 test_example:
                   value:
-                    auth_token: eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njg0NTg2MzgsImlzcyI6Imlzc3Vlcl9uYW1lIiwiYXVkIjoiY2xpZW50IiwidXNlcl9pZCI6MTI3M30.SC_Qs28iTQmXPKQ8gf70jRHYsEJJ24k7B3W_6cc6Ylg
+                    auth_token: eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njg0NTk3OTgsImlzcyI6Imlzc3Vlcl9uYW1lIiwiYXVkIjoiY2xpZW50IiwidXNlcl9pZCI6MTMxN30.VKZR9dmPbEd0OVacPbLW6ssm1KPHX0Fy1XRrJK_A-DM
               schema:
                 auth_token:
                   type: string
