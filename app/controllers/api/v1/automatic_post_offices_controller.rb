@@ -9,7 +9,7 @@ module Api
       before_action :collection, only: %i[index export_xlsx]
 
       def index
-        list = params[:page] ? @collection.page(params[:page]).per(params[:per_page] || 10) : @collection
+        list = params[:page] ? @collection.includes(:area).page(params[:page]).per(params[:per_page] || 10) : @collection.includes(:area)
         render json: list, each_serializer: serializer, meta: meta_attributes(list), adapter: :json, status: :ok
       end
 
@@ -19,7 +19,7 @@ module Api
         list = @collection.includes(:placement_object_type, :district)
         raise ActiveRecord::RecordNotFound unless list.count.positive?
 
-        file = XlsxGenerator::AutomaticPostOffices.call(list:, filename: @filename)
+        file = XlsxGenerator::AutomaticPostOffices.call(list: list, filename: @filename)
         send_data(file.to_stream.read, filename: @filename)
       ensure
         File.delete(@filename) if File.exist?(@filename)
@@ -41,7 +41,6 @@ module Api
 
       def collection
         @collection ||= ::AutomaticPostOfficesFilter.call(::AutomaticPostOffice.all, filter_params, ordering_params(order_params))
-                                                    .includes(:area)
       end
 
       def filter_params
